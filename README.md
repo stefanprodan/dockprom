@@ -20,7 +20,7 @@ Containers:
 * cAdvisor (containers metrics collector)
 
 While Granafa supports authentication, the Prometheus and AlertManager services have no such feature. 
-You can remove the ports mapping from the docker-compose file and use NGINX as a reverse proxy with basic authentication for Prometheus and AlertManager.
+You can remove the ports mapping from the docker-compose file and use NGINX as a reverse proxy providing basic authentication for Prometheus and AlertManager.
 
 ## Setup Grafana
 
@@ -38,8 +38,17 @@ Use the following values to add the Prometheues container as data source:
 Now you can import the dashboard temples from the [grafana](https://github.com/stefanprodan/dockerprom/tree/master/grafana) directory. 
 From the Granafa menu, choose ***Dashboards*** and click on ***Import***.
 
+***Docker Host Dashboard***
 
+![Host](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Docker_Host.png)
 
+***Docker Containers Dashboard***
+
+![Containers](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Docker_Containers.png)
+
+***Monitor Services Dashboard***
+
+![Monitor Services](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Monitor_Services.png)
 
 
 
