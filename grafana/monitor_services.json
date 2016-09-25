@@ -1,8 +1,8 @@
 {
-  "id": 12,
-  "title": "Prometheus Server",
+  "id": null,
+  "title": "Monitor Services",
   "tags": [
-    "prometheus "
+    "prometheus"
   ],
   "style": "dark",
   "timezone": "browser",
@@ -25,7 +25,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "datasource": "Prometheus",
-          "decimals": null,
+          "decimals": 1,
           "editable": true,
           "error": false,
           "format": "s",
@@ -83,7 +83,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Uptime",
+          "title": "Prometheus Uptime",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -154,7 +154,7 @@
           },
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{image=\"prom/prometheus\"})",
+              "expr": "sum(container_memory_usage_bytes{container_label_org_label_schema_group=\"monitoring\"})",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -343,6 +343,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 2,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -360,6 +361,7 @@
             "current": false,
             "max": true,
             "min": true,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": true
@@ -373,25 +375,25 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image=\"prom/prometheus\"}[1m])) / count(node_cpu{mode=\"system\"}) * 100",
-              "intervalFactor": 1,
-              "legendFormat": "prometheus",
+              "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group=\"monitoring\"}[1m])) by (name)",
+              "intervalFactor": 2,
+              "legendFormat": "{{ name }}",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container CPU Usage",
+          "title": "Container CPU Cores Usage",
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "cumulative"
           },
           "type": "graph",
@@ -400,7 +402,7 @@
           },
           "yaxes": [
             {
-              "format": "percent",
+              "format": "percentunit",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -438,6 +440,7 @@
             "current": false,
             "max": true,
             "min": true,
+            "rightSide": true,
             "show": true,
             "total": false,
             "values": true
@@ -451,18 +454,18 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{image=\"prom/prometheus\"}) by (name)",
+              "expr": "sum(container_memory_usage_bytes{container_label_org_label_schema_group=\"monitoring\"}) by (name)",
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{ name }}",
               "metric": "container_memory_usage_bytes",
               "refId": "A",
-              "step": 20
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -509,6 +512,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 0,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -548,7 +552,7 @@
               "intervalFactor": 4,
               "legendFormat": "samples",
               "refId": "A",
-              "step": 40
+              "step": 4
             }
           ],
           "timeFrom": null,
@@ -581,8 +585,7 @@
               "min": null,
               "show": true
             }
-          ],
-          "decimals": 0
+          ]
         }
       ],
       "title": "Prometheus ingest"
@@ -634,7 +637,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{job}}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -712,7 +715,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{quantile}} ({{interval}})",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -759,6 +762,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 0,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -793,16 +797,18 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(http_request_duration_microseconds_count{handler=~\"query|query_range\"}[1m])",
+              "expr": "sum(rate(http_requests_total{instance=\"localhost:9090\"}[1m])) by (instance)",
+              "interval": "10s",
               "intervalFactor": 2,
-              "legendFormat": "{{ handler }}",
+              "legendFormat": "{{ instance }}",
+              "metric": "http_requests_total",
               "refId": "A",
               "step": 20
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Prometheus HTTP Request Duration",
+          "title": "Prometheus HTTP Requests",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -815,11 +821,11 @@
           },
           "yaxes": [
             {
-              "format": "Âµs",
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": 0,
               "show": true
             },
             {
@@ -828,7 +834,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
+              "show": false
             }
           ]
         }
@@ -837,7 +843,7 @@
     }
   ],
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -873,7 +879,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 4,
+  "version": 11,
   "links": [],
   "gnetId": null
 }

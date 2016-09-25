@@ -1,6 +1,6 @@
 {
-  "id": 10,
-  "title": "Docker Server",
+  "id": null,
+  "title": "Docker Host",
   "description": "Docker host metrics",
   "tags": [
     "system"
@@ -236,7 +236,7 @@
               "intervalFactor": 2,
               "metric": "machine_cpu_cores",
               "refId": "A",
-              "step": 600
+              "step": 20
             }
           ],
           "thresholds": "",
@@ -811,7 +811,7 @@
               "legendFormat": "{{ mode }}",
               "metric": "node_cpu",
               "refId": "A",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -916,28 +916,28 @@
               "intervalFactor": 1,
               "legendFormat": "Used",
               "refId": "A",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "node_memory_MemFree",
               "intervalFactor": 1,
               "legendFormat": "Free",
               "refId": "B",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "node_memory_Buffers",
               "intervalFactor": 1,
               "legendFormat": "Buffers",
               "refId": "C",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "node_memory_Cached",
               "intervalFactor": 1,
               "legendFormat": "Cached",
               "refId": "D",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -984,6 +984,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 2,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1039,7 +1040,7 @@
               "legendFormat": "read",
               "metric": "node_disk_bytes_read",
               "refId": "A",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "sum(irate(node_disk_bytes_written[5m]))",
@@ -1047,7 +1048,7 @@
               "legendFormat": "written",
               "metric": "node_disk_bytes_written",
               "refId": "B",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "sum(irate(node_disk_io_time_ms[5m]))",
@@ -1055,7 +1056,7 @@
               "legendFormat": "io time",
               "metric": "node_disk_io_time_ms",
               "refId": "C",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -1102,6 +1103,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 2,
           "editable": true,
           "error": false,
           "fill": 4,
@@ -1143,7 +1145,7 @@
               "legendFormat": "In: {{ device }}",
               "metric": "node_network_receive_bytes",
               "refId": "A",
-              "step": 10
+              "step": 1
             },
             {
               "expr": "irate(node_network_transmit_bytes{device!=\"lo\"}[5m])",
@@ -1151,7 +1153,7 @@
               "legendFormat": "Out: {{ device }}",
               "metric": "node_network_transmit_bytes",
               "refId": "B",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -1296,6 +1298,7 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "Prometheus",
+          "decimals": 2,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1384,7 +1387,7 @@
     }
   ],
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {

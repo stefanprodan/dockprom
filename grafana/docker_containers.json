@@ -1,5 +1,5 @@
 {
-  "id": 11,
+  "id": null,
   "title": "Docker Containers",
   "description": "Containers metrics",
   "tags": [
@@ -161,7 +161,7 @@
               "legendFormat": "",
               "metric": "machine_cpu_cores",
               "refId": "A",
-              "step": 600
+              "step": 20
             }
           ],
           "thresholds": "",
@@ -549,10 +549,10 @@
             {
               "expr": "count(container_memory_usage_bytes{image!=\"\"} > 0)",
               "interval": "",
-              "intervalFactor": 1,
+              "intervalFactor": 2,
               "legendFormat": "containers",
               "refId": "A",
-              "step": 30
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -633,11 +633,11 @@
             {
               "expr": "node_load1",
               "interval": "",
-              "intervalFactor": 1,
+              "intervalFactor": 2,
               "legendFormat": "load 1m",
               "metric": "node_load1",
               "refId": "A",
-              "step": 30
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -758,7 +758,7 @@
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 2,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
@@ -833,11 +833,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) by (name)",
+              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\", container_label_org_label_schema_group!=\"monitoring\"}[1m])) by (name)",
               "intervalFactor": 2,
               "legendFormat": "{{ name }}",
+              "metric": "container_cpu_user_seconds_total",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -859,7 +860,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": 0,
               "show": true
             },
             {
@@ -868,7 +869,7 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
+              "show": false
             }
           ]
         }
@@ -921,12 +922,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{image!=\"\"}) by (name)",
+              "expr": "sum(container_memory_usage_bytes{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}) by (name)",
               "intervalFactor": 1,
               "legendFormat": "{{ name }}",
               "metric": "container_memory_usage",
               "refId": "A",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -948,7 +949,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": 0,
               "show": true
             },
             {
@@ -1002,12 +1003,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_cache{image!=\"\"}) by (name)",
+              "expr": "sum(container_memory_cache{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}) by (name)",
               "intervalFactor": 2,
               "legendFormat": "{{name}}",
               "metric": "container_memory_cache",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "timeFrom": null,
@@ -1091,11 +1092,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\"}[1m]))",
+              "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
               "intervalFactor": 1,
               "legendFormat": "{{ name }}",
+              "metric": "container_network_receive_bytes_total",
               "refId": "A",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -1117,7 +1119,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": 0,
               "show": true
             },
             {
@@ -1171,12 +1173,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\"}[1m]))",
+              "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
               "intervalFactor": 1,
               "legendFormat": "{{ name }}",
               "metric": "container_network_transmit_bytes_total",
               "refId": "A",
-              "step": 10
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -1198,7 +1200,7 @@
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": 0,
               "show": true
             },
             {
@@ -1216,7 +1218,7 @@
     }
   ],
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1252,7 +1254,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 6,
+  "version": 5,
   "links": [],
   "gnetId": null
 }
