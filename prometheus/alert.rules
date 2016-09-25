@@ -1,0 +1,15 @@
+ALERT monitor_service_down
+  IF up == 0
+  FOR 1m
+  ANNOTATIONS {
+      summary = "Monitor service non-operational",
+      description = "Service {{ $labels.job }} is down.",
+  }
+
+ALERT high_load
+  IF node_load1 > 1.5
+  FOR 1m
+  ANNOTATIONS {
+      summary = "Instance {{ $labels.instance }} under high load",
+      description = "{{ $labels.instance }} of job {{ $labels.job }} is under high load.",
+  }
