@@ -21,6 +21,7 @@ services:
       - '-storage.local.path=/prometheus'
       - '-alertmanager.url=http://alertmanager:9093'
       - '-storage.local.memory-chunks=100000'
+    restart: unless-stopped
     expose:
       - 9090
     ports:
@@ -38,6 +39,7 @@ services:
     command:
       - '-config.file=/etc/alertmanager/config.yml'
       - '-storage.path=/alertmanager'
+    restart: unless-stopped
     expose:
       - 9093
     ports:
@@ -50,6 +52,7 @@ services:
   nodeexporter:
     image: prom/node-exporter
     container_name: nodeexporter
+    restart: unless-stopped
     expose:
       - 9100
     networks:
@@ -65,6 +68,7 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+    restart: unless-stopped
     expose:
       - 8080
     networks:
@@ -79,6 +83,7 @@ services:
       - grafana_data:/var/lib/grafana
     env_file:
       - user.config
+    restart: unless-stopped
     expose:
       - 3000
     ports:
