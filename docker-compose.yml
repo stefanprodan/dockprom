@@ -1,0 +1,89 @@
+version: '2'
+
+networks:
+  monitor-net:
+    driver: bridge
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '-config.file=/etc/prometheus/prometheus.yml'
+      - '-storage.local.path=/prometheus'
+      - '-alertmanager.url=http://alertmanager:9093'
+      - '-storage.local.memory-chunks=100000'
+    expose:
+      - 9090
+    ports:
+      - 9090:9090
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+  
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    volumes: 
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '-config.file=/etc/alertmanager/config.yml'
+      - '-storage.path=/alertmanager'
+    expose:
+      - 9093
+    ports:
+      - 9093:9093
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  nodeexporter:
+    image: prom/node-exporter
+    container_name: nodeexporter
+    expose:
+      - 9100
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  cadvisor:
+    image: google/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env_file:
+      - user.config
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
