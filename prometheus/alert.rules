@@ -1,15 +1,62 @@
 ALERT monitor_service_down
   IF up == 0
-  FOR 1m
+  FOR 30s
+  LABELS { severity = "critical" }
   ANNOTATIONS {
       summary = "Monitor service non-operational",
-      description = "Service {{ $labels.job }} is down.",
+      description = "{{ $labels.instance }} of job {{ $labels.job }} is down.",
   }
 
-ALERT high_load
+ALERT high_cpu_load
   IF node_load1 > 1.5
-  FOR 1m
+  FOR 30s
+  LABELS { severity = "warning" }
   ANNOTATIONS {
       summary = "Instance {{ $labels.instance }} under high load",
       description = "{{ $labels.instance }} of job {{ $labels.job }} is under high load.",
+  }
+
+ALERT high_memory_load
+  IF (sum(node_memory_MemTotal) - sum(node_memory_MemFree + node_memory_Buffers + node_memory_Cached) ) / sum(node_memory_MemTotal) * 100 > 85
+  FOR 30s
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+      summary = "Server memory is almost full",
+      description = "{{ $labels.instance }} of job {{ $labels.job }} memory usage is {{ humanize $value}}%.",
+  }
+
+ALERT hight_storage_load
+  IF (node_filesystem_size{fstype="aufs"} - node_filesystem_free{fstype="aufs"}) / node_filesystem_size{fstype="aufs"}  * 100 > 85
+  FOR 30s
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+      summary = "Server storage is almost full",
+      description = "{{ $labels.instance }} of job {{ $labels.job }} storage usage is {{ humanize $value}}%.",
+  }
+
+ALERT jenkins_down
+  IF absent(container_memory_usage_bytes{name="jenkins"})
+  FOR 30s
+  LABELS { severity = "critical" }
+  ANNOTATIONS {
+    summary= "Jenkins down",
+    description= "Jenkins container is down for more than 30 seconds."
+  }
+
+ ALERT jenkins_high_cpu
+  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[5m])) / count(node_cpu{mode="system"}) * 100 > 10
+  FOR 30s
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+    summary= "Jenkins high CPU usage",
+    description= "Jenkins CPU usage is {{ humanize $value}}%."
+  }
+
+ALERT jenkins_high_memory
+  IF sum(container_memory_usage_bytes{name="jenkins"}) > 1200000000
+  FOR 30s
+  LABELS { severity = "warning" }
+  ANNOTATIONS {
+      summary = "Jenkins high memory usage",
+      description = "Jenkins memory consumption is at {{ humanize $value}}.",
   }
