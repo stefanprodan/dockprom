@@ -36,6 +36,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 1,
           "interval": null,
           "isNew": true,
@@ -83,6 +84,8 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "1s",
+          "timeShift": null,
           "title": "Prometheus Uptime",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -381,10 +384,10 @@
           "targets": [
             {
               "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group=\"monitoring\"}[1m])) by (name)",
-              "intervalFactor": 2,
+              "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "timeFrom": null,
@@ -461,11 +464,11 @@
             {
               "expr": "sum(container_memory_usage_bytes{container_label_org_label_schema_group=\"monitoring\"}) by (name)",
               "interval": "",
-              "intervalFactor": 1,
+              "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_memory_usage_bytes",
               "refId": "A",
-              "step": 1
+              "step": 10
             }
           ],
           "timeFrom": null,
@@ -474,7 +477,7 @@
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "cumulative"
           },
           "type": "graph",
@@ -549,10 +552,10 @@
           "targets": [
             {
               "expr": "rate(prometheus_local_storage_ingested_samples_total[5m])",
-              "intervalFactor": 4,
+              "intervalFactor": 1,
               "legendFormat": "samples",
               "refId": "A",
-              "step": 4
+              "step": 1
             }
           ],
           "timeFrom": null,
@@ -572,7 +575,7 @@
             {
               "format": "short",
               "label": null,
-              "logBase": 1,
+              "logBase": 10,
               "max": null,
               "min": null,
               "show": true
@@ -797,7 +800,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(http_requests_total{instance=\"localhost:9090\"}[1m])) by (instance)",
+              "expr": "sum(irate(http_requests_total[1m])) by (instance)",
               "interval": "10s",
               "intervalFactor": 2,
               "legendFormat": "{{ instance }}",
@@ -879,7 +882,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 11,
+  "version": 7,
   "links": [],
   "gnetId": null
 }
