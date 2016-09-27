@@ -5,6 +5,7 @@ receivers:
     - name: 'slack'
       slack_configs:
           - send_resolved: true
+            text: "{{ .CommonAnnotations.description }}"
             username: '<username>'
             channel: '#<channel-name>'
-            api_url: '<incomming-webhook-url>'
+            api_url: '<webhook-url>'
