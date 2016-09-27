@@ -547,7 +547,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "count(container_memory_usage_bytes{image!=\"\"} > 0)",
+              "expr": "count_scalar(container_memory_usage_bytes{image!=\"\"} > 0)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "containers",
@@ -1254,7 +1254,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 5,
+  "version": 1,
   "links": [],
   "gnetId": null
 }
