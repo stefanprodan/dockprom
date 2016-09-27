@@ -80,7 +80,8 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus samples ingested rate graph
 * Prometheus target scrapes graph
 * Prometheus scrape duration graph
-* Prometheus targets HTTP requests graph
+* Prometheus HTTP requests graph
+* Prometheus alerts graph
 
 The Prometheus memory usage can be controlled by tunning the local storage memory chunks. 
 You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockerprom/blob/master/docker-compose.yml). 
@@ -192,7 +193,8 @@ ALERT jenkins_high_memory
 ## Setup alerting
 
 The AlertManager service is responsible for handling alerts sent by Prometheus server. 
-AlertManager can send notifications via email, PagerDuty, Slack, HipChat or any other system that exposes a webhook interface.
+AlertManager can send notifications via email, Pushover, Slack, HipChat or any other system that exposes a webhook interface. 
+A compleat list of integrations can be found [here](https://prometheus.io/docs/alerting/configuration).
 
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
