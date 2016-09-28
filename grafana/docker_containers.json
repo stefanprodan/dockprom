@@ -75,7 +75,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[5m])) / count(node_cpu{mode=\"system\"}) * 100",
+              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(node_cpu{mode=\"system\"}) * 100",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -833,17 +833,17 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\", container_label_org_label_schema_group!=\"monitoring\"}[1m])) by (name)",
-              "intervalFactor": 2,
+              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\", container_label_org_label_schema_group!=\"monitoring\"}[1m]) * 100  / count_scalar(node_cpu{mode=\"user\"})) by (name)",
+              "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_cpu_user_seconds_total",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Container CPU Cores Usage",
+          "title": "Container CPU Usage",
           "tooltip": {
             "msResolution": true,
             "shared": true,
@@ -856,7 +856,7 @@
           },
           "yaxes": [
             {
-              "format": "percentunit",
+              "format": "percent",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -936,7 +936,7 @@
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 2,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
@@ -1017,7 +1017,7 @@
           "tooltip": {
             "msResolution": true,
             "shared": true,
-            "sort": 2,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
@@ -1093,11 +1093,11 @@
           "targets": [
             {
               "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
-              "intervalFactor": 1,
+              "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_network_receive_bytes_total",
               "refId": "A",
-              "step": 1
+              "step": 10
             }
           ],
           "timeFrom": null,
@@ -1174,11 +1174,11 @@
           "targets": [
             {
               "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
-              "intervalFactor": 1,
+              "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_network_transmit_bytes_total",
               "refId": "A",
-              "step": 1
+              "step": 10
             }
           ],
           "timeFrom": null,
@@ -1254,7 +1254,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 1,
+  "version": 6,
   "links": [],
   "gnetId": null
 }
