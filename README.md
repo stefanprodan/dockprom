@@ -85,7 +85,7 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 
 The Prometheus memory usage can be controlled by tunning the local storage memory chunks. 
 You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockerprom/blob/master/docker-compose.yml). 
-I've set the `storage.local.memory-chunks` value to 100000, if you monitor 10 containers, then Prometheus will use up to 500MB RAM.
+I've set the `storage.local.memory-chunks` value to 100000, if you monitor 10 containers, then Prometheus will use around 1GB of RAM.
 
 ## Define alerts
 
@@ -102,7 +102,7 @@ ALERT monitor_service_down
   LABELS { severity = "critical" }
   ANNOTATIONS {
       summary = "Monitor service non-operational",
-      description = "{{ $labels.instance }} of job {{ $labels.job }} is down.",
+      description = "Service {{ $labels.instance }} is down.",
   }
 ```
 
@@ -117,7 +117,7 @@ ALERT high_cpu_load
   LABELS { severity = "warning" }
   ANNOTATIONS {
       summary = "Server under high load",
-      description = "{{ $labels.instance }} of job {{ $labels.job }} is under high load.",
+      description = "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
   }
 ```
 
@@ -132,7 +132,7 @@ ALERT high_memory_load
   LABELS { severity = "warning" }
   ANNOTATIONS {
       summary = "Server memory is almost full",
-      description = "{{ $labels.instance }} of job {{ $labels.job }} memory usage is {{ humanize $value}}%.",
+      description = "Docker host memory usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
   }
 ```
 
@@ -145,7 +145,7 @@ ALERT hight_storage_load
   LABELS { severity = "warning" }
   ANNOTATIONS {
       summary = "Server storage is almost full",
-      description = "{{ $labels.instance }} of job {{ $labels.job }} storage usage is {{ humanize $value}}%.",
+      description = "Docker host storage usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
   }
 ```
 
@@ -168,7 +168,7 @@ Trigger an alert if a container is using more then 10% of total CPU cores for mo
 
 ```yaml
  ALERT jenkins_high_cpu
-  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[5m])) / count(node_cpu{mode="system"}) * 100 > 10
+  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu{mode="system"}) * 100 > 10
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
