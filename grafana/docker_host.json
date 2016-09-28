@@ -153,7 +153,7 @@
           },
           "targets": [
             {
-              "expr": "sum(irate(node_cpu{mode=\"idle\"}[5m])) * 100 / count_scalar(node_cpu{mode=\"user\"})",
+              "expr": "sum(irate(node_cpu{mode=\"idle\"}[1m])) * 100 / count_scalar(node_cpu{mode=\"user\"})",
               "interval": "10s",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -806,12 +806,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(node_cpu[5m])) by (mode) * 100 / count_scalar(node_cpu{mode=\"user\"}) or sum(irate(node_cpu[5m])) by (mode) * 100 / count_scalar(node_cpu{mode=\"user\"})",
-              "intervalFactor": 1,
+              "expr": "sum(rate(node_cpu[1m])) by (mode) * 100 / count_scalar(node_cpu{mode=\"user\"})",
+              "intervalFactor": 10,
               "legendFormat": "{{ mode }}",
               "metric": "node_cpu",
               "refId": "A",
-              "step": 1
+              "step": 10
             }
           ],
           "timeFrom": null,
@@ -1034,7 +1034,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(node_disk_bytes_read[5m]))",
+              "expr": "sum(irate(node_disk_bytes_read[1m]))",
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "read",
@@ -1043,7 +1043,7 @@
               "step": 1
             },
             {
-              "expr": "sum(irate(node_disk_bytes_written[5m]))",
+              "expr": "sum(irate(node_disk_bytes_written[1m]))",
               "intervalFactor": 1,
               "legendFormat": "written",
               "metric": "node_disk_bytes_written",
@@ -1051,7 +1051,7 @@
               "step": 1
             },
             {
-              "expr": "sum(irate(node_disk_io_time_ms[5m]))",
+              "expr": "sum(irate(node_disk_io_time_ms[1m]))",
               "intervalFactor": 1,
               "legendFormat": "io time",
               "metric": "node_disk_io_time_ms",
@@ -1140,7 +1140,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_network_receive_bytes{device!=\"lo\"}[5m])",
+              "expr": "irate(node_network_receive_bytes{device!=\"lo\"}[1m])",
               "intervalFactor": 1,
               "legendFormat": "In: {{ device }}",
               "metric": "node_network_receive_bytes",
@@ -1148,7 +1148,7 @@
               "step": 1
             },
             {
-              "expr": "irate(node_network_transmit_bytes{device!=\"lo\"}[5m])",
+              "expr": "irate(node_network_transmit_bytes{device!=\"lo\"}[1m])",
               "intervalFactor": 1,
               "legendFormat": "Out: {{ device }}",
               "metric": "node_network_transmit_bytes",
@@ -1334,7 +1334,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_vmstat_pswpin[5m]) * 4096 or irate(node_vmstat_pswpin[5m]) * 4096",
+              "expr": "rate(node_vmstat_pswpin[1m]) * 4096 or irate(node_vmstat_pswpin[5m]) * 4096",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "In",
@@ -1342,7 +1342,7 @@
               "step": 10
             },
             {
-              "expr": "rate(node_vmstat_pswpout[5m]) * 4096 or irate(node_vmstat_pswpout[5m]) * 4096",
+              "expr": "rate(node_vmstat_pswpout[1m]) * 4096 or irate(node_vmstat_pswpout[5m]) * 4096",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "Out",
@@ -1423,7 +1423,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 3,
+  "version": 1,
   "links": [],
   "gnetId": null
 }
