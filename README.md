@@ -60,7 +60,7 @@ The Docker Containers Dashboard shows key metrics for monitoring running contain
 
 * Total containers CPU load, memory and storage usage
 * Running containers graph, system load graph, IO usage graph
-* Container CPU usage graph depending on the number of cores your server has, if your server has 4 cores then a container usage can go up to 400%
+* Container CPU usage graph
 * Container memory usage graph
 * Container cached memory usage graph
 * Container network inbound usage graph
@@ -75,7 +75,7 @@ Note that this dashboard doesn't show the containers that are part of the monito
 The Monitor Services Dashboard shows key metrics for monitoring the containers that make up the monitoring stack:
 
 * Prometheus container uptime, monitoring stack total memory usage, Prometheus local storage memory chunks and series
-* Container CPU Cores usage graph
+* Container CPU usage graph
 * Container memory usage graph
 * Prometheus samples ingested rate graph
 * Prometheus target scrapes graph
