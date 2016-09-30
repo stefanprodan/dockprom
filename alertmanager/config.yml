@@ -6,6 +6,6 @@ receivers:
       slack_configs:
           - send_resolved: true
             text: "{{ .CommonAnnotations.description }}"
-            username: '<username>'
+            username: 'Prometheus'
             channel: '#<channel-name>'
-            api_url: '<webhook-url>'
+            api_url: 'https://hooks.slack.com/services/<webhook-id>'

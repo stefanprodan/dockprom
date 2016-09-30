@@ -1,14 +1,14 @@
-# dockerprom
+# dockprom
 
-Docker host &amp; containers monitoring with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
+A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
 ## Install
 
-Clone this repository on your Docker host, cd into dockerprom directory and run compose up:
+Clone this repository on your Docker host, cd into dockprom directory and run compose up:
 
 * `$ git clone https://github.com/stefanprodan/dockprom` 
-* `$ cd dockerprom`
+* `$ cd dockprom`
 * `$ docker-compose up -d`
 
 Containers:
@@ -103,7 +103,7 @@ curl -X POST http://<host-ip>:9090/-/reload
 
 ***Monitoring services alerts***
 
-Trigger an alert if the monitoring targets (node-exporter and cAdvisor) are down for more then 30 seconds:
+Trigger an alert if any of the monitoring targets (node-exporter and cAdvisor) are down for more then 30 seconds:
 
 ```yaml
 ALERT monitor_service_down
@@ -112,7 +112,7 @@ ALERT monitor_service_down
   LABELS { severity = "critical" }
   ANNOTATIONS {
       summary = "Monitor service non-operational",
-      description = "Service {{ $labels.instance }} is down.",
+      description = "{{ $labels.instance }} service is down.",
   }
 ```
 
@@ -213,7 +213,7 @@ The notification receivers can be configured in [alertmanager/config.yml](https:
 To receive alerts via Slack you need to make a custom integration by choose ***incoming web hooks*** in your Slack team app page. 
 You can find more details on setting up Slack integration [here](http://www.robustperception.io/using-slack-with-the-alertmanager/).
 
-Copy the Slack Webhook URL into the ***api_url*** field and fill the ***username*** and ***channel*** fields.
+Copy the Slack Webhook URL into the ***api_url*** field and specify a Slack ***channel***.
 
 ```yaml
 route:
@@ -224,9 +224,9 @@ receivers:
       slack_configs:
           - send_resolved: true
             text: "{{ .CommonAnnotations.description }}"
-            username: '<username>'
+            username: 'Prometheus'
             channel: '#<channel>'
-            api_url: '<webhook-url>'
+            api_url: 'https://hooks.slack.com/services/<webhook-id>'
 ```
 
 ![Slack Notifications](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Slack_Notifications.png)
