@@ -77,9 +77,9 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus container uptime, monitoring stack total memory usage, Prometheus local storage memory chunks and series
 * Container CPU usage graph
 * Container memory usage graph
-* Prometheus samples ingested rate graph
-* Prometheus target scrapes graph
-* Prometheus scrape duration graph
+* Prometheus chunks to persist and persistence urgency graphs
+* Prometheus chunks ops and checkpoint duration graphs
+* Prometheus samples ingested rate, target scrapes and scrape duration graphs
 * Prometheus HTTP requests graph
 * Prometheus alerts graph
 
