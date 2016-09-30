@@ -95,7 +95,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -255,7 +257,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -325,6 +329,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "Used Memory",
           "transparent": false,
           "type": "singlestat",
@@ -336,7 +341,8 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -417,7 +423,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -497,7 +505,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         }
       ],
       "title": "Overview"
@@ -1254,7 +1264,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 6,
+  "version": 8,
   "links": [],
   "gnetId": null
 }
