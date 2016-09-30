@@ -95,6 +95,12 @@ I've setup three alerts configuration files:
 * Docker Host alerts [hosts.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/hosts.rules)
 * Docker Containers alerts [containers.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/containers.rules)
 
+You can modify the alert rules and reload them by making a HTTP POST call to Prometheus:
+
+```
+curl -X POST http://<host-ip>:9090/-/reload
+```
+
 ***Monitoring services alerts***
 
 Trigger an alert if the monitoring targets (node-exporter and cAdvisor) are down for more then 30 seconds:
