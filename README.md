@@ -7,7 +7,7 @@ Docker host &amp; containers monitoring with [Prometheus](https://prometheus.io/
 
 Clone this repository on your Docker host, cd into dockerprom directory and run compose up:
 
-* `$ git clone https://github.com/stefanprodan/dockerprom` 
+* `$ git clone https://github.com/stefanprodan/dockprom` 
 * `$ cd dockerprom`
 * `$ docker-compose up -d`
 
@@ -25,7 +25,7 @@ You can remove the ports mapping from the docker-compose file and use NGINX as a
 ## Setup Grafana
 
 Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the password from Granafa UI or 
- by modifying the [user.config](https://github.com/stefanprodan/dockerprom/blob/master/user.config) file.
+ by modifying the [user.config](https://github.com/stefanprodan/dockprom/blob/master/user.config) file.
 
 From the Granafa menu, choose ***Data Sources*** and click on ***Add Data Source***. 
 Use the following values to add the Prometheues container as data source:
@@ -35,12 +35,12 @@ Use the following values to add the Prometheues container as data source:
 * Url: http://prometheus:9090
 * Access: proxy
 
-Now you can import the dashboard temples from the [grafana](https://github.com/stefanprodan/dockerprom/tree/master/grafana) directory. 
+Now you can import the dashboard temples from the [grafana](https://github.com/stefanprodan/dockprom/tree/master/grafana) directory. 
 From the Granafa menu, choose ***Dashboards*** and click on ***Import***.
 
 ***Docker Host Dashboard***
 
-![Host](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Docker_Host.png)
+![Host](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Docker_Host.png)
 
 The Docker Host Dashboard shows key metrics for monitoring the resource usage of your server:
 
@@ -54,7 +54,7 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 
 ***Docker Containers Dashboard***
 
-![Containers](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Docker_Containers.png)
+![Containers](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Docker_Containers.png)
 
 The Docker Containers Dashboard shows key metrics for monitoring running container:
 
@@ -70,7 +70,7 @@ Note that this dashboard doesn't show the containers that are part of the monito
 
 ***Monitor Services Dashboard***
 
-![Monitor Services](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Grafana_Monitor_Services.png)
+![Monitor Services](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Monitor_Services.png)
 
 The Monitor Services Dashboard shows key metrics for monitoring the containers that make up the monitoring stack:
 
@@ -84,12 +84,16 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus alerts graph
 
 The Prometheus memory usage can be controlled by tunning the local storage memory chunks. 
-You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockerprom/blob/master/docker-compose.yml). 
+You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockprom/blob/master/docker-compose.yml). 
 I've set the `storage.local.memory-chunks` value to 100000, if you monitor 10 containers, then Prometheus will use around 1GB of RAM.
 
 ## Define alerts
 
-You can define alerts in the [alert.rules](https://github.com/stefanprodan/dockerprom/blob/master/prometheus/alert.rules) file.
+I've setup three alerts configuration files:
+
+* Monitoring services alerts [targets.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/targets.rules)
+* Docker Host alerts [hosts.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/hosts.rules)
+* Docker Containers alerts [containers.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/containers.rules)
 
 ***Monitoring services alerts***
 
@@ -198,7 +202,7 @@ A compleat list of integrations can be found [here](https://prometheus.io/docs/a
 
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
-The notification receivers can be configured in [alertmanager/config.yml](https://github.com/stefanprodan/dockerprom/blob/master/alertmanager/config.yml) file.
+The notification receivers can be configured in [alertmanager/config.yml](https://github.com/stefanprodan/dockprom/blob/master/alertmanager/config.yml) file.
 
 To receive alerts via Slack you need to make a custom integration by choose ***incoming web hooks*** in your Slack team app page. 
 You can find more details on setting up Slack integration [here](http://www.robustperception.io/using-slack-with-the-alertmanager/).
@@ -219,4 +223,4 @@ receivers:
             api_url: '<webhook-url>'
 ```
 
-![Slack Notifications](https://raw.githubusercontent.com/stefanprodan/dockerprom/master/screens/Slack_Notifications.png)
+![Slack Notifications](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Slack_Notifications.png)
