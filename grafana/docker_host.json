@@ -93,7 +93,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -172,7 +174,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -236,7 +240,7 @@
               "intervalFactor": 2,
               "metric": "machine_cpu_cores",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "thresholds": "",
@@ -250,7 +254,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -329,7 +335,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -407,7 +415,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         },
         {
           "cacheTimeout": null,
@@ -486,7 +496,9 @@
               "value": "null"
             }
           ],
-          "valueName": "avg"
+          "valueName": "avg",
+          "timeFrom": "10s",
+          "hideTimeOverride": true
         }
       ],
       "title": "Available resources"
@@ -1423,7 +1435,7 @@
   },
   "refresh": "10s",
   "schemaVersion": 12,
-  "version": 1,
+  "version": 2,
   "links": [],
   "gnetId": null
 }
