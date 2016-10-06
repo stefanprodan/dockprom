@@ -15,20 +15,20 @@ Containers:
 
 * Prometheus (metrics database) `http://<host-ip>:9090`
 * AlertManager (alerts management) `http://<host-ip>:9093`
-* Granafa (visualize metrics) `http://<host-ip>:3000`
+* Grafana (visualize metrics) `http://<host-ip>:3000`
 * NodeExporter (host metrics collector)
 * cAdvisor (containers metrics collector)
 
-While Granafa supports authentication, the Prometheus and AlertManager services have no such feature. 
+While Grafana supports authentication, the Prometheus and AlertManager services have no such feature. 
 You can remove the ports mapping from the docker-compose file and use NGINX as a reverse proxy providing basic authentication for Prometheus and AlertManager.
 
 ## Setup Grafana
 
-Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the password from Granafa UI or 
+Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the password from Grafana UI or 
  by modifying the [user.config](https://github.com/stefanprodan/dockprom/blob/master/user.config) file.
 
-From the Granafa menu, choose ***Data Sources*** and click on ***Add Data Source***. 
-Use the following values to add the Prometheues container as data source:
+From the Grafana menu, choose ***Data Sources*** and click on ***Add Data Source***. 
+Use the following values to add the Prometheus container as data source:
 
 * Name: Prometheus
 * Type: Prometheus
@@ -36,7 +36,7 @@ Use the following values to add the Prometheues container as data source:
 * Access: proxy
 
 Now you can import the dashboard temples from the [grafana](https://github.com/stefanprodan/dockprom/tree/master/grafana) directory. 
-From the Granafa menu, choose ***Dashboards*** and click on ***Import***.
+From the Grafana menu, choose ***Dashboards*** and click on ***Import***.
 
 ***Docker Host Dashboard***
 
@@ -44,7 +44,7 @@ From the Granafa menu, choose ***Dashboards*** and click on ***Import***.
 
 The Docker Host Dashboard shows key metrics for monitoring the resource usage of your server:
 
-* Server uptime, CPU idle percent, numner of CPU cores, available memory, swap and storage
+* Server uptime, CPU idle percent, number of CPU cores, available memory, swap and storage
 * System load average graph, running and blocked by IO processes graph, interrupts graph
 * CPU usage graph by mode (guest, idle, iowait, irq, nice, softirq, steal, system, user)
 * Memory usage graph by distribution (used, free, buffers, cached)
@@ -204,7 +204,7 @@ ALERT jenkins_high_memory
 
 The AlertManager service is responsible for handling alerts sent by Prometheus server. 
 AlertManager can send notifications via email, Pushover, Slack, HipChat or any other system that exposes a webhook interface. 
-A compleat list of integrations can be found [here](https://prometheus.io/docs/alerting/configuration).
+A complete list of integrations can be found [here](https://prometheus.io/docs/alerting/configuration).
 
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
