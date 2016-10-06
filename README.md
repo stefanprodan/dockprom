@@ -56,7 +56,7 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 
 ![Containers](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Docker_Containers.png)
 
-The Docker Containers Dashboard shows key metrics for monitoring running container:
+The Docker Containers Dashboard shows key metrics for monitoring running containers:
 
 * Total containers CPU load, memory and storage usage
 * Running containers graph, system load graph, IO usage graph
@@ -83,7 +83,7 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus HTTP requests graph
 * Prometheus alerts graph
 
-The Prometheus memory usage can be controlled by tunning the local storage memory chunks. 
+Prometheus memory usage can be controlled by adjusting the local storage memory chunks.
 You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockprom/blob/master/docker-compose.yml). 
 I've set the `storage.local.memory-chunks` value to 100000, if you monitor 10 containers, then Prometheus will use around 1GB of RAM.
 
@@ -103,7 +103,7 @@ curl -X POST http://<host-ip>:9090/-/reload
 
 ***Monitoring services alerts***
 
-Trigger an alert if any of the monitoring targets (node-exporter and cAdvisor) are down for more then 30 seconds:
+Trigger an alert if any of the monitoring targets (node-exporter and cAdvisor) are down for more than 30 seconds:
 
 ```yaml
 ALERT monitor_service_down
@@ -118,7 +118,7 @@ ALERT monitor_service_down
 
 ***Docker Host alerts***
 
-Trigger an alert if the Docker host CPU is under hight load for more then 30 seconds:
+Trigger an alert if the Docker host CPU is under hight load for more than 30 seconds:
 
 ```yaml
 ALERT high_cpu_load
@@ -161,7 +161,7 @@ ALERT hight_storage_load
 
 ***Docker Containers alerts***
 
-Trigger an alert if a container is down for more then 30 seconds:
+Trigger an alert if a container is down for more than 30 seconds:
 
 ```yaml
 ALERT jenkins_down
@@ -174,7 +174,7 @@ ALERT jenkins_down
   }
 ```
 
-Trigger an alert if a container is using more then 10% of total CPU cores for more then 30 seconds:
+Trigger an alert if a container is using more than 10% of total CPU cores for more than 30 seconds:
 
 ```yaml
  ALERT jenkins_high_cpu
@@ -187,7 +187,7 @@ Trigger an alert if a container is using more then 10% of total CPU cores for mo
   }
 ```
 
-Trigger an alert if a container is using more then 1,2GB of RAM for more then 30 seconds:
+Trigger an alert if a container is using more than 1,2GB of RAM for more than 30 seconds:
 
 ```yaml
 ALERT jenkins_high_memory
