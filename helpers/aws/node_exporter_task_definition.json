@@ -1,0 +1,22 @@
+{
+    "family": "prometheus",
+    "containerDefinitions": [
+        {
+            "portMappings": [
+                {
+                    "hostPort": 9100,
+                    "containerPort": 9100,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "name": "node_exporter",
+            "image": "prom/node-exporter",
+            "cpu": 0,
+            "privileged": null,
+            "memoryReservation": 150
+        }
+    ],
+    "volumes": [],
+    "networkMode": "host"
+}

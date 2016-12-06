@@ -1,0 +1,78 @@
+{
+    "family": "cadvisor",
+    "containerDefinitions": [
+        {
+            "name": "cadvisor",
+            "image": "google/cadvisor",
+            "cpu": 10,
+            "memory": 300,
+            "portMappings": [
+                {
+                    "containerPort": 9191,
+                    "hostPort": 9191
+                }
+            ],
+            "essential": true,
+            "privileged": true,
+            "mountPoints": [
+                {
+                    "sourceVolume": "root",
+                    "containerPath": "/rootfs",
+                    "readOnly": true
+                },
+                {
+                    "sourceVolume": "var_run",
+                    "containerPath": "/var/run",
+                    "readOnly": false
+                },
+                {
+                    "sourceVolume": "sys",
+                    "containerPath": "/sys",
+                    "readOnly": true
+                },
+                {
+                    "sourceVolume": "var_lib_docker",
+                    "containerPath": "/var/lib/docker",
+                    "readOnly": true
+                },
+                {
+                    "sourceVolume": "cgroup",
+                    "containerPath": "/cgroup",
+                    "readOnly": true
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        {
+            "name": "root",
+            "host": {
+                "sourcePath": "/"
+            }
+        },
+        {
+            "name": "var_run",
+            "host": {
+                "sourcePath": "/var/run"
+            }
+        },
+        {
+            "name": "sys",
+            "host": {
+                "sourcePath": "/sys"
+            }
+        },
+        {
+            "name": "var_lib_docker",
+            "host": {
+                "sourcePath": "/var/lib/docker/"
+            }
+        },
+        {
+            "name": "cgroup",
+            "host": {
+                "sourcePath": "/cgroup"
+            }
+        }
+    ]
+}

@@ -10,7 +10,7 @@ global:
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
   - "targets.rules"
-  - "host.rules"
+  - "hosts.rules"
   - "containers.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape.
@@ -30,12 +30,24 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-#  - job_name: 'nginx'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['nginxexporter:9113']
 
-#  - job_name: 'aspnetcore'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['eventlog-proxy:5000', 'eventlog:5000']
+# sample scrape configuration for AWS EC2
+  - job_name: 'nodeexporter'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+    relabel_configs:
+        # Only monitor instances which have a tag called Monitoring "Monitoring"
+      - source_labels: [__meta_ec2_tag_Monitoring]
+        regex: On
+        action: keep
+
+  - job_name: 'cadvisor'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9010
+    relabel_configs:
+        # Only monitor instances which have a tag called Monitoring "Monitoring"
+      - source_labels: [__meta_ec2_tag_Monitoring]
+        regex: On
+        action: keep
