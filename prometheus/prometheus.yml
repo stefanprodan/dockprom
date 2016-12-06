@@ -10,7 +10,7 @@ global:
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
   - "targets.rules"
-  - "hosts.rules"
+  - "host.rules"
   - "containers.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape.
