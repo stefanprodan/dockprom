@@ -35,8 +35,10 @@ Use the following values to add the Prometheus container as data source:
 * Url: http://prometheus:9090
 * Access: proxy
 
-Now you can import the dashboard temples from the [grafana](https://github.com/stefanprodan/dockprom/tree/master/grafana) directory. 
-From the Grafana menu, choose ***Dashboards*** and click on ***Import***.
+Save and close this window.
+
+One by one, import all 4 dashboard templates from the [grafana](https://github.com/stefanprodan/dockprom/tree/master/grafana) directory. 
+From the Grafana menu, choose ***Dashboards*** and click on ***Import***. Do this for all 4 dashboards.
 
 ***Docker Host Dashboard***
 
