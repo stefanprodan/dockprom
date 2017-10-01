@@ -92,7 +92,7 @@ I've set the Prometheus retention period to 200h and the heap size to 1GB, you c
     image: prom/prometheus
     command:
       - '-storage.local.target-heap-size=1073741824'
-      - '-storage.local.retention=24h'
+      - '-storage.local.retention=200h'
 ```
 
 Make sure you set the heap size to a maximum of 50% of the total physical memory. 
@@ -108,7 +108,7 @@ I've setup three alerts configuration files:
 You can modify the alert rules and reload them by making a HTTP POST call to Prometheus:
 
 ```
-curl -X POST http://<host-ip>:9090/-/reload
+curl -X POST http://admin:admin@<host-ip>:9090/-/reload
 ```
 
 ***Monitoring services alerts***
