@@ -7,9 +7,12 @@ A monitoring solution for Docker hosts and containers with [Prometheus](https://
 
 Clone this repository on your Docker host, cd into dockprom directory and run compose up:
 
-* `$ git clone https://github.com/stefanprodan/dockprom` 
-* `$ cd dockprom`
-* `$ docker-compose up -d`
+```bash
+git clone https://github.com/stefanprodan/dockprom
+cd dockprom
+
+ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
+```
 
 Containers:
 
@@ -18,14 +21,11 @@ Containers:
 * Grafana (visualize metrics) `http://<host-ip>:3000`
 * NodeExporter (host metrics collector)
 * cAdvisor (containers metrics collector)
-
-While Grafana supports authentication, the Prometheus and AlertManager services have no such feature. 
-You can remove the ports mapping from the docker-compose file and use NGINX as a reverse proxy providing basic authentication for Prometheus and AlertManager.
+* Caddy (reverse proxy and basic auth provider for prometheus and alertmanager) 
 
 ## Setup Grafana
 
-Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the password from Grafana UI or 
- by modifying the [user.config](https://github.com/stefanprodan/dockprom/blob/master/user.config) file.
+Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up.
 
 From the Grafana menu, choose ***Data Sources*** and click on ***Add Data Source***. 
 Use the following values to add the Prometheus container as data source:
