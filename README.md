@@ -85,9 +85,17 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus HTTP requests graph
 * Prometheus alerts graph
 
-Prometheus memory usage can be controlled by adjusting the local storage memory chunks.
-You can modify the max chunks value in [docker-compose.yml](https://github.com/stefanprodan/dockprom/blob/master/docker-compose.yml). 
-I've set the `storage.local.memory-chunks` value to 100000, if you monitor 10 containers, then Prometheus will use around 1GB of RAM.
+I've set the Prometheus retention period to 200h and the heap size to 1GB, you can change these values in the compose file.
+
+```yaml
+  prometheus:
+    image: prom/prometheus
+    command:
+      - '-storage.local.target-heap-size=1073741824'
+      - '-storage.local.retention=24h'
+```
+
+Make sure you set the heap size to a maximum of 50% of the total physical memory. 
 
 ## Define alerts
 
