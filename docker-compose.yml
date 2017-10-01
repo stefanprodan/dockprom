@@ -24,8 +24,6 @@ services:
     restart: unless-stopped
     expose:
       - 9090
-    ports:
-      - 9090:9090
     networks:
       - monitor-net
     labels:
@@ -42,8 +40,6 @@ services:
     restart: unless-stopped
     expose:
       - 9093
-    ports:
-      - 9093:9093
     networks:
       - monitor-net
     labels:
@@ -91,6 +87,26 @@ services:
       - grafana_data:/var/lib/grafana
     env_file:
       - user.config
+    restart: unless-stopped
+    expose:
+      - 3000
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  caddy:
+    image: stefanprodan/caddy
+    container_name: caddy
+    ports:
+      - "3000:3000"
+      - "9090:9090"
+      - "9093:9093"
+    volumes:
+      - ./caddy/Caddyfile:/var/etc/caddy/Caddyfile
+    environment:
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
     restart: unless-stopped
     expose:
       - 3000
