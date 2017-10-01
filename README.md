@@ -30,7 +30,7 @@ Containers:
 
 ## Setup Grafana
 
-Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***changeme***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up.
+Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up.
 
 From the Grafana menu, choose ***Data Sources*** and click on ***Add Data Source***. 
 Use the following values to add the Prometheus container as data source:
