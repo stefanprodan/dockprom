@@ -110,10 +110,6 @@ services:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
     restart: unless-stopped
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
     networks:
       - monitor-net
     labels:
