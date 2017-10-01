@@ -14,6 +14,11 @@ cd dockprom
 ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
 ```
 
+Prerequisites:
+
+* Docker Engine >= 1.13
+* Docker Compose >= 1.11
+
 Containers:
 
 * Prometheus (metrics database) `http://<host-ip>:9090`
