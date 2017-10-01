@@ -102,7 +102,7 @@ Make sure you set the heap size to a maximum of 50% of the total physical memory
 I've setup three alerts configuration files:
 
 * Monitoring services alerts [targets.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/targets.rules)
-* Docker Host alerts [hosts.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/hosts.rules)
+* Docker Host alerts [host.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/host.rules)
 * Docker Containers alerts [containers.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/containers.rules)
 
 You can modify the alert rules and reload them by making a HTTP POST call to Prometheus:
