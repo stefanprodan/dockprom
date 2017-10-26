@@ -34,18 +34,12 @@ Containers:
 
 Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up.
 
-From the Grafana menu, choose ***Data Sources*** and click on ***Add Data Source***. 
-Use the following values to add the Prometheus container as data source:
+Grafana is preconfigured with dashboards and Prometheus as the default data source:
 
 * Name: Prometheus
 * Type: Prometheus
 * Url: http://prometheus:9090
 * Access: proxy
-
-Save and close this window.
-
-One by one, import all 4 dashboard templates from the [grafana](https://github.com/stefanprodan/dockprom/tree/master/grafana) directory. 
-From the Grafana menu, choose ***Dashboards*** and click on ***Import***. Do this for all 4 dashboards.
 
 ***Docker Host Dashboard***
 
