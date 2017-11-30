@@ -11,20 +11,18 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v1.8.0
+    image: prom/prometheus:v2.0.0
     container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
-      - '-config.file=/etc/prometheus/prometheus.yml'
-      - '-storage.local.path=/prometheus'
-      - '-web.console.libraries=/etc/prometheus/console_libraries'
-      - '-web.console.templates=/etc/prometheus/consoles'
-      - '-alertmanager.url=http://alertmanager:9093'
-      - '-storage.local.target-heap-size=1073741824'
-      - '-storage.local.retention=200h'
-    restart: unless-stopped
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=200h'
+    # restart: unless-stopped
     expose:
       - 9090
     networks:
@@ -70,7 +68,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: google/cadvisor:v0.27.1
+    image: google/cadvisor:v0.28.2
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro

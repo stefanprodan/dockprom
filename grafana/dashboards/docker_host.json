@@ -155,7 +155,7 @@
           },
           "targets": [
             {
-              "expr": "sum(irate(node_cpu{mode=\"idle\"}[1m])) * 100 / count_scalar(node_cpu{mode=\"user\"})",
+              "expr": "sum(rate(node_cpu{mode=\"idle\"}[1m])) * 100 / scalar(count(node_cpu{mode=\"user\"}))",
               "interval": "10s",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -477,7 +477,7 @@
           },
           "targets": [
             {
-              "expr": "sum(node_filesystem_free{fstype=\"aufs\"})",
+              "expr": "sum(node_filesystem_free{fstype=\"btrfs\"})",
               "interval": "30s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -818,7 +818,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(node_cpu[1m])) by (mode) * 100 / count_scalar(node_cpu{mode=\"user\"})",
+              "expr": "sum(rate(node_cpu[1m])) by (mode) * 100 / scalar(count(node_cpu{mode=\"user\"}))",
               "intervalFactor": 10,
               "legendFormat": "{{ mode }}",
               "metric": "node_cpu",

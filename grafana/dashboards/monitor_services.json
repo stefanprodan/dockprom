@@ -240,7 +240,7 @@
           },
           "targets": [
             {
-              "expr": "prometheus_local_storage_memory_chunks",
+              "expr": "prometheus_tsdb_head_chunks",
               "interval": "10s",
               "intervalFactor": 1,
               "refId": "A",
@@ -321,7 +321,7 @@
           },
           "targets": [
             {
-              "expr": "prometheus_local_storage_memory_series",
+              "expr": "prometheus_tsdb_head_series",
               "interval": "10s",
               "intervalFactor": 1,
               "refId": "A",
@@ -392,7 +392,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group=\"monitoring\"}[1m]) * 100  / count_scalar(node_cpu{mode=\"user\"})) by (name)",
+              "expr": "sum(rate(container_cpu_user_seconds_total{container_label_org_label_schema_group=\"monitoring\"}[1m]) * 100  / scalar(count(node_cpu{mode=\"user\"}))) by (name)",
               "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "refId": "A",
