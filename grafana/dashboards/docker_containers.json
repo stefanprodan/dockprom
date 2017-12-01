@@ -75,7 +75,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(node_cpu{mode=\"system\"}) * 100",
+              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(node_cpu{mode=\"user\"}) * 100",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -486,7 +486,7 @@
           },
           "targets": [
             {
-              "expr": "sum (container_fs_usage_bytes)",
+              "expr": "sum(container_fs_usage_bytes)",
               "interval": "30s",
               "intervalFactor": 2,
               "refId": "A",
@@ -557,7 +557,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "count_scalar(container_memory_usage_bytes{image!=\"\"} > 0)",
+              "expr": "scalar(count(container_memory_usage_bytes{image!=\"\"}) > 0)",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "containers",
@@ -843,7 +843,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\", container_label_org_label_schema_group!=\"monitoring\"}[1m]) * 100  / count_scalar(node_cpu{mode=\"user\"})) by (name)",
+              "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m])) / scalar(count(node_cpu{mode=\"user\"})) * 100",
               "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_cpu_user_seconds_total",
@@ -932,7 +932,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}) by (name)",
+              "expr": "sum by (name)(container_memory_usage_bytes{image!=\"\",container_label_org_label_schema_group=\"\"})",
               "intervalFactor": 1,
               "legendFormat": "{{ name }}",
               "metric": "container_memory_usage",
@@ -1013,7 +1013,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_cache{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}) by (name)",
+              "expr": "sum by (name) (container_memory_cache{image!=\"\",container_label_org_label_schema_group=\"\"})",
               "intervalFactor": 2,
               "legendFormat": "{{name}}",
               "metric": "container_memory_cache",
@@ -1102,7 +1102,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
+              "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m]))",
               "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_network_receive_bytes_total",
@@ -1183,7 +1183,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\",container_label_org_label_schema_group!=\"monitoring\"}[1m]))",
+              "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m]))",
               "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_network_transmit_bytes_total",

@@ -1,4 +1,5 @@
-# dockprom
+dockprom
+========
 
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
@@ -54,6 +55,17 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 * IO usage graph (read Bps, read Bps and IO time)
 * Network usage graph by device (inbound Bps, Outbound Bps)
 * Swap usage and activity graphs
+
+For storage and particularly Free Storage graph, you have to specify the fstype in grafana graph request.
+You can find it in `grafana/dashboards/docker_host.json`, at line 480 :
+
+      "expr": "sum(node_filesystem_free{fstype=\"btrfs\"})",
+      
+I work on BTRFS, so i need to change `aufs` to `btrfs`.
+
+You can find right value for your system in Prometheus `http://<host-ip>:9090` launching this request :
+
+      node_filesystem_free
 
 ***Docker Containers Dashboard***
 
