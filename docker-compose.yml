@@ -32,13 +32,13 @@ services:
       org.label-schema.group: "monitoring"
   
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:v0.13.0
     container_name: alertmanager
     volumes: 
       - ./alertmanager/:/etc/alertmanager/
     command:
-      - '-config.file=/etc/alertmanager/config.yml'
-      - '-storage.path=/alertmanager'
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
     restart: unless-stopped
     expose:
       - 9093
