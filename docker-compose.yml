@@ -37,8 +37,8 @@ services:
     volumes: 
       - ./alertmanager/:/etc/alertmanager/
     command:
-      - '-config.file=/etc/alertmanager/config.yml'
-      - '-storage.path=/alertmanager'
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
     restart: unless-stopped
     expose:
       - 9093
