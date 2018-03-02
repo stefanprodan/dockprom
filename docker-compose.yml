@@ -23,7 +23,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention=200h'
       - '--web.enable-lifecycle'
-    # restart: unless-stopped
+    restart: unless-stopped
     expose:
       - 9090
     networks:
