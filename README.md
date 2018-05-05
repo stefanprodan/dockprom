@@ -141,7 +141,7 @@ ALERT monitor_service_down
 
 ***Docker Host alerts***
 
-Trigger an alert if the Docker host CPU is under hight load for more than 30 seconds:
+Trigger an alert if the Docker host CPU is under high load for more than 30 seconds:
 
 ```yaml
 ALERT high_cpu_load
