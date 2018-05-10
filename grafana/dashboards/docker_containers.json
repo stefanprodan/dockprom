@@ -75,7 +75,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(node_cpu{mode=\"user\"}) * 100",
+              "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(wmi_cpu{mode=\"user\"}) * 100",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -237,7 +237,7 @@
           },
           "targets": [
             {
-              "expr": "(sum(node_memory_MemTotal) - sum(node_memory_MemFree+node_memory_Buffers+node_memory_Cached) ) / sum(node_memory_MemTotal) * 100",
+              "expr": "(sum(wmi_memory_MemTotal) - sum(wmi_memory_MemFree+wmi_memory_Buffers+wmi_memory_Cached) ) / sum(wmi_memory_MemTotal) * 100",
               "interval": "10s",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -403,7 +403,7 @@
           },
           "targets": [
             {
-              "expr": "(node_filesystem_size{fstype=\"aufs\"} - node_filesystem_free{fstype=\"aufs\"}) / node_filesystem_size{fstype=\"aufs\"}  * 100",
+              "expr": "(wmi_filesystem_size{fstype=\"aufs\"} - wmi_filesystem_free{fstype=\"aufs\"}) / wmi_filesystem_size{fstype=\"aufs\"}  * 100",
               "interval": "30s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -641,11 +641,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_load1",
+              "expr": "wmi_load1",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "load 1m",
-              "metric": "node_load1",
+              "metric": "wmi_load1",
               "refId": "A",
               "step": 2
             }
@@ -735,7 +735,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(node_disk_bytes_read[5m]))",
+              "expr": "sum(irate(wmi_disk_bytes_read[5m]))",
               "interval": "2s",
               "intervalFactor": 4,
               "legendFormat": "read",
@@ -744,7 +744,7 @@
               "step": 8
             },
             {
-              "expr": "sum(irate(node_disk_bytes_written[5m]))",
+              "expr": "sum(irate(wmi_disk_bytes_written[5m]))",
               "interval": "2s",
               "intervalFactor": 4,
               "legendFormat": "written",
@@ -753,7 +753,7 @@
               "step": 8
             },
             {
-              "expr": "sum(irate(node_disk_io_time_ms[5m]))",
+              "expr": "sum(irate(wmi_disk_io_time_ms[5m]))",
               "interval": "2s",
               "intervalFactor": 4,
               "legendFormat": "io time",
@@ -843,7 +843,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m])) / scalar(count(node_cpu{mode=\"user\"})) * 100",
+              "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m])) / scalar(count(wmi_cpu{mode=\"user\"})) * 100",
               "intervalFactor": 10,
               "legendFormat": "{{ name }}",
               "metric": "container_cpu_user_seconds_total",

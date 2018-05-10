@@ -75,7 +75,7 @@
           },
           "targets": [
             {
-              "expr": "node_time - node_boot_time",
+              "expr": "wmi_time - wmi_boot_time",
               "interval": "30s",
               "intervalFactor": 1,
               "refId": "A",
@@ -155,7 +155,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(node_cpu{mode=\"idle\"}[1m])) * 100 / scalar(count(node_cpu{mode=\"user\"}))",
+              "expr": "sum(rate(wmi_cpu{mode=\"idle\"}[1m])) * 100 / scalar(count(wmi_cpu{mode=\"user\"}))",
               "interval": "10s",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -316,7 +316,7 @@
           },
           "targets": [
             {
-              "expr": "node_memory_MemAvailable",
+              "expr": "wmi_memory_MemAvailable",
               "interval": "30s",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -397,7 +397,7 @@
           },
           "targets": [
             {
-              "expr": "node_memory_SwapFree",
+              "expr": "wmi_memory_SwapFree",
               "interval": "30s",
               "intervalFactor": 2,
               "refId": "A",
@@ -477,7 +477,7 @@
           },
           "targets": [
             {
-              "expr": "sum(node_filesystem_free{fstype=\"aufs\"})",
+              "expr": "sum(wmi_filesystem_free{fstype=\"aufs\"})",
               "interval": "30s",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -552,7 +552,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_load1",
+              "expr": "wmi_load1",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "load 1m",
@@ -635,20 +635,20 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_procs_running",
+              "expr": "wmi_procs_running",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "running",
-              "metric": "node_procs_running",
+              "metric": "wmi_procs_running",
               "refId": "A",
               "step": 10
             },
             {
-              "expr": "node_procs_blocked",
+              "expr": "wmi_procs_blocked",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "blocked by I/O",
-              "metric": "node_procs_blocked",
+              "metric": "wmi_procs_blocked",
               "refId": "B",
               "step": 10
             }
@@ -728,11 +728,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": " irate(node_intr[5m])",
+              "expr": " irate(wmi_intr[5m])",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "interrupts",
-              "metric": "node_intr",
+              "metric": "wmi_intr",
               "refId": "A",
               "step": 10
             }
@@ -818,10 +818,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(node_cpu[1m])) by (mode) * 100 / scalar(count(node_cpu{mode=\"user\"}))",
+              "expr": "sum(rate(wmi_cpu[1m])) by (mode) * 100 / scalar(count(wmi_cpu{mode=\"user\"}))",
               "intervalFactor": 10,
               "legendFormat": "{{ mode }}",
-              "metric": "node_cpu",
+              "metric": "wmi_cpu",
               "refId": "A",
               "step": 10
             }
@@ -924,28 +924,28 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemTotal - (node_memory_MemFree + node_memory_Buffers + node_memory_Cached)",
+              "expr": "wmi_memory_MemTotal - (wmi_memory_MemFree + wmi_memory_Buffers + wmi_memory_Cached)",
               "intervalFactor": 1,
               "legendFormat": "Used",
               "refId": "A",
               "step": 1
             },
             {
-              "expr": "node_memory_MemFree",
+              "expr": "wmi_memory_MemFree",
               "intervalFactor": 1,
               "legendFormat": "Free",
               "refId": "B",
               "step": 1
             },
             {
-              "expr": "node_memory_Buffers",
+              "expr": "wmi_memory_Buffers",
               "intervalFactor": 1,
               "legendFormat": "Buffers",
               "refId": "C",
               "step": 1
             },
             {
-              "expr": "node_memory_Cached",
+              "expr": "wmi_memory_Cached",
               "intervalFactor": 1,
               "legendFormat": "Cached",
               "refId": "D",
@@ -1046,27 +1046,27 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(irate(node_disk_bytes_read[1m]))",
+              "expr": "sum(irate(wmi_disk_bytes_read[1m]))",
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "read",
-              "metric": "node_disk_bytes_read",
+              "metric": "wmi_disk_bytes_read",
               "refId": "A",
               "step": 1
             },
             {
-              "expr": "sum(irate(node_disk_bytes_written[1m]))",
+              "expr": "sum(irate(wmi_disk_bytes_written[1m]))",
               "intervalFactor": 1,
               "legendFormat": "written",
-              "metric": "node_disk_bytes_written",
+              "metric": "wmi_disk_bytes_written",
               "refId": "B",
               "step": 1
             },
             {
-              "expr": "sum(irate(node_disk_io_time_ms[1m]))",
+              "expr": "sum(irate(wmi_disk_io_time_ms[1m]))",
               "intervalFactor": 1,
               "legendFormat": "io time",
-              "metric": "node_disk_io_time_ms",
+              "metric": "wmi_disk_io_time_ms",
               "refId": "C",
               "step": 1
             }
@@ -1152,18 +1152,18 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_network_receive_bytes{device!=\"lo\"}[1m])",
+              "expr": "irate(wmi_network_receive_bytes{device!=\"lo\"}[1m])",
               "intervalFactor": 1,
               "legendFormat": "In: {{ device }}",
-              "metric": "node_network_receive_bytes",
+              "metric": "wmi_network_receive_bytes",
               "refId": "A",
               "step": 1
             },
             {
-              "expr": "irate(node_network_transmit_bytes{device!=\"lo\"}[1m])",
+              "expr": "irate(wmi_network_transmit_bytes{device!=\"lo\"}[1m])",
               "intervalFactor": 1,
               "legendFormat": "Out: {{ device }}",
-              "metric": "node_network_transmit_bytes",
+              "metric": "wmi_network_transmit_bytes",
               "refId": "B",
               "step": 1
             }
@@ -1258,7 +1258,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_SwapTotal - node_memory_SwapFree",
+              "expr": "wmi_memory_SwapTotal - wmi_memory_SwapFree",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "Used",
@@ -1266,7 +1266,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_SwapFree",
+              "expr": "wmi_memory_SwapFree",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "Free",
@@ -1346,7 +1346,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_vmstat_pswpin[1m]) * 4096 or irate(node_vmstat_pswpin[5m]) * 4096",
+              "expr": "rate(wmi_vmstat_pswpin[1m]) * 4096 or irate(wmi_vmstat_pswpin[5m]) * 4096",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "In",
@@ -1354,7 +1354,7 @@
               "step": 10
             },
             {
-              "expr": "rate(node_vmstat_pswpout[1m]) * 4096 or irate(node_vmstat_pswpout[5m]) * 4096",
+              "expr": "rate(wmi_vmstat_pswpout[1m]) * 4096 or irate(wmi_vmstat_pswpout[5m]) * 4096",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "Out",
