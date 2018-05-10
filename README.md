@@ -2,7 +2,7 @@ dockprom
 ========
 
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
-[NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
+[NodeExporter](https://github.com/prometheus/wmi_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
 ***If you're looking for the Docker Swarm version please go to [stefanprodan/swarmprom](https://github.com/stefanprodan/swarmprom)***
 
@@ -59,13 +59,13 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 For storage and particularly Free Storage graph, you have to specify the fstype in grafana graph request.
 You can find it in `grafana/dashboards/docker_host.json`, at line 480 :
 
-      "expr": "sum(node_filesystem_free{fstype=\"btrfs\"})",
+      "expr": "sum(wmi_filesystem_free{fstype=\"btrfs\"})",
       
 I work on BTRFS, so i need to change `aufs` to `btrfs`.
 
 You can find right value for your system in Prometheus `http://<host-ip>:9090` launching this request :
 
-      node_filesystem_free
+      wmi_filesystem_free
 
 ***Docker Containers Dashboard***
 
@@ -145,7 +145,7 @@ Trigger an alert if the Docker host CPU is under high load for more than 30 seco
 
 ```yaml
 ALERT high_cpu_load
-  IF node_load1 > 1.5
+  IF wmi_load1 > 1.5
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
@@ -160,7 +160,7 @@ Trigger an alert if the Docker host memory is almost full:
 
 ```yaml
 ALERT high_memory_load
-  IF (sum(node_memory_MemTotal) - sum(node_memory_MemFree + node_memory_Buffers + node_memory_Cached) ) / sum(node_memory_MemTotal) * 100 > 85
+  IF (sum(wmi_memory_MemTotal) - sum(wmi_memory_MemFree + wmi_memory_Buffers + wmi_memory_Cached) ) / sum(wmi_memory_MemTotal) * 100 > 85
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
@@ -173,7 +173,7 @@ Trigger an alert if the Docker host storage is almost full:
 
 ```yaml
 ALERT hight_storage_load
-  IF (node_filesystem_size{fstype="aufs"} - node_filesystem_free{fstype="aufs"}) / node_filesystem_size{fstype="aufs"}  * 100 > 85
+  IF (wmi_filesystem_size{fstype="aufs"} - wmi_filesystem_free{fstype="aufs"}) / wmi_filesystem_size{fstype="aufs"}  * 100 > 85
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
@@ -201,7 +201,7 @@ Trigger an alert if a container is using more than 10% of total CPU cores for mo
 
 ```yaml
  ALERT jenkins_high_cpu
-  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu{mode="system"}) * 100 > 10
+  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(wmi_cpu{mode="system"}) * 100 > 10
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {

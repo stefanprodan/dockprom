@@ -312,7 +312,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"nginx\"}[5m])) / count(node_cpu{mode=\"system\"}) * 100",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"nginx\"}[5m])) / count(wmi_cpu{mode=\"system\"}) * 100",
               "intervalFactor": 2,
               "legendFormat": "nginx",
               "refId": "A",

@@ -10,7 +10,7 @@
                 }
             ],
             "essential": true,
-            "name": "node_exporter",
+            "name": "wmi_exporter",
             "image": "prom/node-exporter",
             "cpu": 0,
             "privileged": null,
