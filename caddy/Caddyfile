@@ -18,6 +18,16 @@
     tls off
 }
 
+:9091 {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / pushgateway:9091 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+
 :3000 {
     proxy / grafana:3000 {
             transparent
