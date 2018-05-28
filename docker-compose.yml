@@ -106,6 +106,17 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    restart: unless-stopped
+    expose:
+      - 9091
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
   caddy:
     image: stefanprodan/caddy
     container_name: caddy
@@ -113,6 +124,7 @@ services:
       - "3000:3000"
       - "9090:9090"
       - "9093:9093"
+      - "9091:9091"
     volumes:
       - ./caddy/:/etc/caddy/
     environment:
