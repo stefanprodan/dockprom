@@ -60,13 +60,13 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 For storage and particularly Free Storage graph, you have to specify the fstype in grafana graph request.
 You can find it in `grafana/dashboards/docker_host.json`, at line 480 :
 
-      "expr": "sum(node_filesystem_free{fstype=\"btrfs\"})",
+      "expr": "sum(node_filesystem_free_bytes{fstype=\"btrfs\"})",
       
 I work on BTRFS, so i need to change `aufs` to `btrfs`.
 
 You can find right value for your system in Prometheus `http://<host-ip>:9090` launching this request :
 
-      node_filesystem_free
+      node_filesystem_free_bytes
 
 ***Docker Containers Dashboard***
 
@@ -161,7 +161,7 @@ Trigger an alert if the Docker host memory is almost full:
 
 ```yaml
 ALERT high_memory_load
-  IF (sum(node_memory_MemTotal) - sum(node_memory_MemFree + node_memory_Buffers + node_memory_Cached) ) / sum(node_memory_MemTotal) * 100 > 85
+  IF (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
@@ -174,7 +174,7 @@ Trigger an alert if the Docker host storage is almost full:
 
 ```yaml
 ALERT hight_storage_load
-  IF (node_filesystem_size{fstype="aufs"} - node_filesystem_free{fstype="aufs"}) / node_filesystem_size{fstype="aufs"}  * 100 > 85
+  IF (node_filesystem_size_bytes{fstype="aufs"} - node_filesystem_free_bytes{fstype="aufs"}) / node_filesystem_size_bytes{fstype="aufs"}  * 100 > 85
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
@@ -202,7 +202,7 @@ Trigger an alert if a container is using more than 10% of total CPU cores for mo
 
 ```yaml
  ALERT jenkins_high_cpu
-  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu{mode="system"}) * 100 > 10
+  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
   FOR 30s
   LABELS { severity = "warning" }
   ANNOTATIONS {
