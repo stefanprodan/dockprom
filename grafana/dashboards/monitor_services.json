@@ -1,4 +1,4 @@
-{
+{"dashboard": {
   "id": null,
   "title": "Monitor Services",
   "tags": [
@@ -1299,4 +1299,4 @@
   "version": 21,
   "links": [],
   "gnetId": null
-}
+}}

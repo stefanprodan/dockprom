@@ -11,7 +11,7 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.3.2
+    image: prom/prometheus:v2.4.2
     container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -32,7 +32,7 @@ services:
       org.label-schema.group: "monitoring"
   
   alertmanager:
-    image: prom/alertmanager:v0.15.1
+    image: prom/alertmanager:v0.15.2
     container_name: alertmanager
     volumes: 
       - ./alertmanager/:/etc/alertmanager/
@@ -86,7 +86,7 @@ services:
       org.label-schema.group: "monitoring"
   
   grafana:
-    image: grafana/grafana:5.2.2
+    image: grafana/grafana:5.2.4
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana

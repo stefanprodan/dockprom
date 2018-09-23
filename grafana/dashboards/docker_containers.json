@@ -1,4 +1,4 @@
-{
+{"dashboard": {
   "id": null,
   "title": "Docker Containers",
   "description": "Containers metrics",
@@ -1267,4 +1267,4 @@
   "version": 8,
   "links": [],
   "gnetId": null
-}
+}}
