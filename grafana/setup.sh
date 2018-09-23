@@ -60,15 +60,12 @@ install_dashboards() {
     if [[ -f "${dashboard}" ]]; then
       echo "Installing dashboard ${dashboard}"
 
-      echo "{\"dashboard\": `cat $dashboard`}" > "${dashboard}.wrapped"
-
-      if grafana_api POST /api/dashboards/db "" "${dashboard}.wrapped"; then
+      if grafana_api POST /api/dashboards/db "" "${dashboard}"; then
         echo "installed ok"
       else
         echo "install failed"
       fi
 
-      rm "${dashboard}.wrapped"
     fi
   done
 }
