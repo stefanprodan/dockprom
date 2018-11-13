@@ -116,18 +116,6 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 * Prometheus HTTP requests graph
 * Prometheus alerts graph
 
-I've set the Prometheus retention period to 200h and the heap size to 1GB, you can change these values in the compose file.
-
-```yaml
-  prometheus:
-    image: prom/prometheus
-    command:
-      - '-storage.local.target-heap-size=1073741824'
-      - '-storage.local.retention=200h'
-```
-
-Make sure you set the heap size to a maximum of 50% of the total physical memory.
-
 ## Define alerts
 
 I've setup three alerts configuration files:
