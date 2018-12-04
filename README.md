@@ -118,11 +118,11 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 
 ## Define alerts
 
-I've setup three alerts configuration files:
+I've setup three alert groups within the [alert.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules) configuration file:
 
-* Monitoring services alerts [targets.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/targets.rules)
-* Docker Host alerts [host.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/host.rules)
-* Docker Containers alerts [containers.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/containers.rules)
+* Monitoring services alerts [targets](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules#L2-L11)
+* Docker Host alerts [host](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules#L13-L40)
+* Docker Containers alerts [containers](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules#L42-L69)
 
 You can modify the alert rules and reload them by making a HTTP POST call to Prometheus:
 
@@ -216,7 +216,7 @@ Trigger an alert if a container is using more than 10% of total CPU cores for mo
   }
 ```
 
-Trigger an alert if a container is using more than 1,2GB of RAM for more than 30 seconds:
+Trigger an alert if a container is using more than 1.2GB of RAM for more than 30 seconds:
 
 ```yaml
 ALERT jenkins_high_memory
