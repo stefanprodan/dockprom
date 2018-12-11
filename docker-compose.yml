@@ -30,11 +30,11 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
-  
+
   alertmanager:
     image: prom/alertmanager:v0.15.3
     container_name: alertmanager
-    volumes: 
+    volumes:
       - ./alertmanager/:/etc/alertmanager/
     command:
       - '--config.file=/etc/alertmanager/config.yml'
@@ -84,9 +84,9 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
-  
+
   grafana:
-    image: grafana/grafana:5.4.0
+    image: grafana/grafana:5.4.1
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
