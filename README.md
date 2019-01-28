@@ -118,7 +118,7 @@ The Monitor Services Dashboard shows key metrics for monitoring the containers t
 
 ## Define alerts
 
-I've setup three alert groups within the [alert.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules) configuration file:
+Three alert groups have been setup within the [alert.rules](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules) configuration file:
 
 * Monitoring services alerts [targets](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules#L2-L11)
 * Docker Host alerts [host](https://github.com/stefanprodan/dockprom/blob/master/prometheus/alert.rules#L13-L40)
@@ -135,14 +135,14 @@ curl -X POST http://admin:admin@<host-ip>:9090/-/reload
 Trigger an alert if any of the monitoring targets (node-exporter and cAdvisor) are down for more than 30 seconds:
 
 ```yaml
-ALERT monitor_service_down
-  IF up == 0
-  FOR 30s
-  LABELS { severity = "critical" }
-  ANNOTATIONS {
-      summary = "Monitor service non-operational",
-      description = "{{ $labels.instance }} service is down.",
-  }
+- alert: monitor_service_down
+    expr: up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Monitor service non-operational"
+      description: "Service {{ $labels.instance }} is down."
 ```
 
 ***Docker Host alerts***
@@ -150,14 +150,14 @@ ALERT monitor_service_down
 Trigger an alert if the Docker host CPU is under high load for more than 30 seconds:
 
 ```yaml
-ALERT high_cpu_load
-  IF node_load1 > 1.5
-  FOR 30s
-  LABELS { severity = "warning" }
-  ANNOTATIONS {
-      summary = "Server under high load",
-      description = "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
-  }
+- alert: high_cpu_load
+    expr: node_load1 > 1.5
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server under high load"
+      description: "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 ```
 
 Modify the load threshold based on your CPU cores.
@@ -165,27 +165,27 @@ Modify the load threshold based on your CPU cores.
 Trigger an alert if the Docker host memory is almost full:
 
 ```yaml
-ALERT high_memory_load
-  IF (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
-  FOR 30s
-  LABELS { severity = "warning" }
-  ANNOTATIONS {
-      summary = "Server memory is almost full",
-      description = "Docker host memory usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
-  }
+- alert: high_memory_load
+    expr: (sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server memory is almost full"
+      description: "Docker host memory usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 ```
 
 Trigger an alert if the Docker host storage is almost full:
 
 ```yaml
-ALERT hight_storage_load
-  IF (node_filesystem_size_bytes{fstype="aufs"} - node_filesystem_free_bytes{fstype="aufs"}) / node_filesystem_size_bytes{fstype="aufs"}  * 100 > 85
-  FOR 30s
-  LABELS { severity = "warning" }
-  ANNOTATIONS {
-      summary = "Server storage is almost full",
-      description = "Docker host storage usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}.",
-  }
+- alert: high_storage_load
+    expr: (node_filesystem_size_bytes{fstype="aufs"} - node_filesystem_free_bytes{fstype="aufs"}) / node_filesystem_size_bytes{fstype="aufs"}  * 100 > 85
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server storage is almost full"
+      description: "Docker host storage usage is {{ humanize $value}}%. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
 ```
 
 ***Docker Containers alerts***
@@ -193,40 +193,40 @@ ALERT hight_storage_load
 Trigger an alert if a container is down for more than 30 seconds:
 
 ```yaml
-ALERT jenkins_down
-  IF absent(container_memory_usage_bytes{name="jenkins"})
-  FOR 30s
-  LABELS { severity = "critical" }
-  ANNOTATIONS {
-    summary= "Jenkins down",
-    description= "Jenkins container is down for more than 30 seconds."
-  }
+- alert: jenkins_down
+    expr: absent(container_memory_usage_bytes{name="jenkins"})
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Jenkins down"
+      description: "Jenkins container is down for more than 30 seconds."
 ```
 
 Trigger an alert if a container is using more than 10% of total CPU cores for more than 30 seconds:
 
 ```yaml
- ALERT jenkins_high_cpu
-  IF sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
-  FOR 30s
-  LABELS { severity = "warning" }
-  ANNOTATIONS {
-    summary= "Jenkins high CPU usage",
-    description= "Jenkins CPU usage is {{ humanize $value}}%."
-  }
+- alert: jenkins_high_cpu
+    expr: sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Jenkins high CPU usage"
+      description: "Jenkins CPU usage is {{ humanize $value}}%."
 ```
 
 Trigger an alert if a container is using more than 1.2GB of RAM for more than 30 seconds:
 
 ```yaml
-ALERT jenkins_high_memory
-  IF sum(container_memory_usage_bytes{name="jenkins"}) > 1200000000
-  FOR 30s
-  LABELS { severity = "warning" }
-  ANNOTATIONS {
-      summary = "Jenkins high memory usage",
-      description = "Jenkins memory consumption is at {{ humanize $value}}.",
-  }
+- alert: jenkins_high_memory
+    expr: sum(container_memory_usage_bytes{name="jenkins"}) > 1200000000
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Jenkins high memory usage"
+      description: "Jenkins memory consumption is at {{ humanize $value}}."
 ```
 
 ## Setup alerting
