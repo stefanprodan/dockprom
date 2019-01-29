@@ -1,0 +1,3 @@
+- targets: ['52.7.67.204:9100']
+  labels:
+    name: 'kafka1-stage'

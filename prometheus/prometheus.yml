@@ -33,7 +33,11 @@ scrape_configs:
     honor_labels: true
     static_configs:
       - targets: ['pushgateway:9091']
-
+  
+  - job_name: 'kafka-preprod'
+    file_sd_configs:
+      - files:
+         - kafka-preprod.yml
 
 alerting:
   alertmanagers:
