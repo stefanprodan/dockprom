@@ -136,8 +136,7 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
-      
-      
+
   loki:
     image: grafana/loki:master
     expose:
