@@ -136,3 +136,20 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+      
+      
+  loki:
+    image: grafana/loki:master
+    expose:
+      - 3100
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitor-net
+
+  promtail:
+    image: grafana/promtail:master
+    volumes:
+      - /var/log:/var/log:ro
+    command: -config.file=/etc/promtail/docker-config.yaml
+    networks:
+      - monitor-net
