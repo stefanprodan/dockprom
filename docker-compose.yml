@@ -149,6 +149,7 @@ services:
     image: grafana/promtail:master
     volumes:
       - /var/log:/var/log:ro
-    command: -config.file=/etc/promtail/docker-config.yaml
+      - ./promtail/:/etc/promtail/:ro
+    command: -config.file=/etc/promtail/promtail.yaml
     networks:
       - monitor-net
