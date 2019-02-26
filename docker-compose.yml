@@ -142,8 +142,11 @@ services:
     expose:
       - 3100
     command: -config.file=/etc/loki/local-config.yaml
+    restart: unless-stopped
     networks:
       - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
 
   promtail:
     image: grafana/promtail:master
@@ -151,5 +154,8 @@ services:
       - /var/log:/var/log:ro
       - ./promtail/:/etc/promtail/:ro
     command: -config.file=/etc/promtail/promtail.yaml
+    restart: unless-stopped
     networks:
       - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
