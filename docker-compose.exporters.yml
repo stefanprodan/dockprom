@@ -19,13 +19,13 @@ services:
     restart: unless-stopped
     ports:
       - 9100:9100
-    network_mode: host
     labels:
       org.label-schema.group: "monitoring"
 
   cadvisor:
     image: google/cadvisor:v0.33.0
     container_name: cadvisor
+    privileged: true
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -35,7 +35,6 @@ services:
     restart: unless-stopped
     ports:
       - 8080:8080
-    network_mode: host
     labels:
       org.label-schema.group: "monitoring"
   
