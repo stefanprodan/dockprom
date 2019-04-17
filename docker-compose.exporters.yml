@@ -17,8 +17,6 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
-    ports:
-      - 9100:9100
     network_mode: host
     labels:
       org.label-schema.group: "monitoring"
@@ -33,8 +31,6 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
       - /cgroup:/cgroup:ro
     restart: unless-stopped
-    ports:
-      - 8080:8080
     network_mode: host
     labels:
       org.label-schema.group: "monitoring"
