@@ -50,8 +50,6 @@ services:
   nodeexporter:
     image: prom/node-exporter:v0.17.0
     container_name: nodeexporter
-    user: root
-    privileged: true
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
