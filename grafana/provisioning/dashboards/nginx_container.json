@@ -1,4 +1,4 @@
-{"dashboard": {
+{
   "id": null,
   "title": "Nginx",
   "description": "Nginx exporter metrics",
@@ -395,4 +395,4 @@
   "version": 9,
   "links": [],
   "gnetId": null
-}}
+}
