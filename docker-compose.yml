@@ -14,7 +14,7 @@ services:
     image: prom/prometheus:v2.14.0
     container_name: prometheus
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -35,7 +35,7 @@ services:
     image: prom/alertmanager:v0.19.0
     container_name: alertmanager
     volumes:
-      - ./alertmanager/:/etc/alertmanager/
+      - ./alertmanager:/etc/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
@@ -74,7 +74,7 @@ services:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
       - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/lib/docker:/var/lib/docker:ro
       #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
     restart: unless-stopped
     expose:
@@ -85,7 +85,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:6.5.0-beta1
+    image: grafana/grafana:6.5.0
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -122,7 +122,7 @@ services:
       - "9093:9093"
       - "9091:9091"
     volumes:
-      - ./caddy/:/etc/caddy/
+      - ./caddy:/etc/caddy
     environment:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
