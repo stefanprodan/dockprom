@@ -103,7 +103,7 @@ services:
       org.label-schema.group: "monitoring"
 
   pushgateway:
-    image: prom/pushgateway:v1.0.0
+    image: prom/pushgateway:v1.0.1
     container_name: pushgateway
     restart: unless-stopped
     expose:
