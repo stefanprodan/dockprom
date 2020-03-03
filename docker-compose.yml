@@ -94,9 +94,9 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    env_file:
+      - config
     environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
     expose:
@@ -123,9 +123,9 @@ services:
     ports:
       - "3000:3000"
       - "8080:8080"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
+      - "127.0.0.1:9090:9090"
+      - "127.0.0.1:9093:9093"
+      - "127.0.0.1:9091:9091"
     volumes:
       - ./caddy:/etc/caddy
     environment:
