@@ -32,7 +32,7 @@ services:
       org.label-schema.group: "monitoring"
 
   alertmanager:
-    image: prom/alertmanager:v0.20.0
+    image: prom/alertmanager:v0.21.0
     container_name: alertmanager
     volumes:
       - ./alertmanager:/etc/alertmanager
