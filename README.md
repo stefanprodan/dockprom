@@ -37,7 +37,7 @@ Containers:
 Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up. The config file can be added directly in grafana part like this
 ```
 grafana:
-  image: grafana/grafana:5.2.4
+  image: grafana/grafana:7.2.0
   env_file:
     - config
 
