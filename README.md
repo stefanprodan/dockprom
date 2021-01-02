@@ -14,8 +14,10 @@ Clone this repository on your Docker host, cd into dockprom directory and run co
 git clone https://github.com/stefanprodan/dockprom
 cd dockprom
 
-ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
+ADMIN_USER=admin ADMIN_PASSWORD=JDJhJDE0JGpTcjZTMlBLTXZsd1VTcXI0endCanVzUHdUY1RLenU5U1VVcHVhQUZUWkNjREpqa3ljdDZD docker-compose up -d
 ```
+
+***For caddy2 a password has to be encrypted in Base64 and it is 'admin'***
 
 Prerequisites:
 
@@ -350,3 +352,4 @@ To run the grafana container as `user: 104` change your `docker-compose.yml` lik
     labels:
       org.label-schema.group: "monitoring"
 ```
+## Updating Caddy to v2
