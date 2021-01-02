@@ -17,7 +17,7 @@ cd dockprom
 ADMIN_USER=admin ADMIN_PASSWORD=JDJhJDE0JGpTcjZTMlBLTXZsd1VTcXI0endCanVzUHdUY1RLenU5U1VVcHVhQUZUWkNjREpqa3ljdDZD docker-compose up -d
 ```
 
-***For caddy2 a password has to be encrypted in Base64 and it is 'admin'***
+***Caddy configuration does not accept plaintext passwords; It MUST be a hash value. Hashed password is admin'***
 
 Prerequisites:
 
@@ -353,3 +353,5 @@ To run the grafana container as `user: 104` change your `docker-compose.yml` lik
       org.label-schema.group: "monitoring"
 ```
 ## Updating Caddy to v2
+
+Perform a `docker exec -it caddy caddy hash-password` in order to generate a hash for your new password. Don't forget to update `ADMIN_PASSWORD`
