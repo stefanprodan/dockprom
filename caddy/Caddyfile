@@ -1,39 +1,25 @@
 :9090 {
-    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
-    proxy / prometheus:9090 {
-            transparent
-        }
-
-    errors stderr
-    tls off
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy prometheus:9090
 }
 
 :9093 {
-    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
-    proxy / alertmanager:9093 {
-            transparent
-        }
-
-    errors stderr
-    tls off
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy alertmanager:9093
 }
 
 :9091 {
-    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
-    proxy / pushgateway:9091 {
-            transparent
-        }
-
-    errors stderr
-    tls off
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    
+    reverse_proxy pushgateway:9091
 }
 
 :3000 {
-    proxy / grafana:3000 {
-            transparent
-            websocket
-        }
-
-    errors stderr
-    tls off
+    reverse_proxy grafana:3000
 }
