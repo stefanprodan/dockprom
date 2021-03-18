@@ -17,7 +17,7 @@ cd dockprom
 ADMIN_USER=admin ADMIN_PASSWORD=JDJhJDE0JGpTcjZTMlBLTXZsd1VTcXI0endCanVzUHdUY1RLenU5U1VVcHVhQUZUWkNjREpqa3ljdDZD docker-compose up -d
 ```
 
-***Caddy configuration does not accept plaintext passwords; It MUST be a hash value. Hashed password is admin'***
+***Caddy configuration does not accept plain text passwords; It MUST be a hash value. The above hashed password is 'admin'***
 
 Prerequisites:
 
