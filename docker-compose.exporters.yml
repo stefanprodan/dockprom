@@ -32,5 +32,5 @@ services:
     network_mode: host
     labels:
       org.label-schema.group: "monitoring"
-  
-
+    devices:
+      - /dev/kmsg:/dev/kmsg
