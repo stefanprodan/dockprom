@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.4'
 
 networks:
   monitor-net:
@@ -7,6 +7,10 @@ networks:
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    prometheus_textfiles:
+      driver_opts:
+        type: tmpfs
+        device: tmpfs
 
 services:
 
@@ -54,11 +58,14 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
+      - prometheus_textfiles:/run/prometheus:ro
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--collector.textfile.directory=/run/prometheus'
+
     restart: unless-stopped
     expose:
       - 9100
@@ -129,6 +136,19 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
     restart: unless-stopped
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  dcgm_exporter:
+    image: nvidia/dcgm-exporter:1.4.3
+    container_name: dcgm_exporter
+    runtime: nvidia
+    volumes:
+      - prometheus_textfiles:/run/prometheus
+    expose:
+      - 8000
     networks:
       - monitor-net
     labels:
