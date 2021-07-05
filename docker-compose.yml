@@ -95,6 +95,9 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_RENDERING_SERVER_URL=http://renderer:8081/render
+      - GF_RENDERING_CALLBACK_URL=http://grafana:3000/
+      - GF_LOG_FILTERS=rendering:debug
     restart: unless-stopped
     expose:
       - 3000
@@ -102,6 +105,17 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+
+  renderer:
+    image: grafana/grafana-image-renderer:2.0.1
+    container_name: grafana-image-renderer
+    expose:
+      - 8081
+    environment:
+      - ENABLE_METRICS=true
+    restart: unless-stopped
+    networks:
+      - monitor-net
 
   pushgateway:
     image: prom/pushgateway:v1.4.1
