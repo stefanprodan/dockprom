@@ -1,0 +1,28 @@
+version: '2.1'
+
+services:
+  prometheus:
+    container_name: dockprom_prometheus
+
+  alertmanager:
+    container_name: dockprom_alertmanager
+
+  nodeexporter:
+    container_name: dockprom_nodeexporter
+
+  cadvisor:
+    container_name: dockprom_cadvisor
+    
+  grafana:
+    container_name: dockprom_grafana
+
+  pushgateway:
+    container_name: dockprom_pushgateway
+    
+  caddy:
+    container_name: dockprom_caddy
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:9090:9090"
+      - "127.0.0.1:9093:9093"
+      - "127.0.0.1:9091:9091"
