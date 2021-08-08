@@ -3,7 +3,7 @@ version: '2.1'
 services:
 
   nodeexporter:
-    image: prom/node-exporter:v1.2.0
+    image: prom/node-exporter:v1.2.2
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
