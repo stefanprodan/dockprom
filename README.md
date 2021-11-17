@@ -22,6 +22,8 @@ Prerequisites:
 
 * Docker Engine >= 1.13
 * Docker Compose >= 1.11
+* [nvidia container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+
 
 ## Updating Caddy to v2
 

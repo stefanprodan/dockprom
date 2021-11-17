@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.3'
 
 networks:
   monitor-net:
@@ -62,6 +62,18 @@ services:
     restart: unless-stopped
     expose:
       - 9100
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  dcgmexporter:
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:2.0.13-2.1.2-ubuntu18.04
+    container_name: dcgmexporter
+    restart: unless-stopped
+    runtime: nvidia
+    expose:
+      - 9400
     networks:
       - monitor-net
     labels:

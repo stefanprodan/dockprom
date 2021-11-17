@@ -1,0 +1,14 @@
+version: '2.3'
+
+services:
+
+  dcgmexporter:
+    network_mode: host
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:2.0.13-2.1.2-ubuntu18.04
+    container_name: dcgmexporter
+    restart: unless-stopped
+    runtime: nvidia
+    expose:
+      - 9400
+    labels:
+      org.label-schema.group: "monitoring"
