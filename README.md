@@ -85,7 +85,7 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 * Swap usage and activity graphs
 
 For storage and particularly Free Storage graph, you have to specify the fstype in grafana graph request.
-You can find it in `grafana/dashboards/docker_host.json`, at line 480 :
+You can find it in `grafana/provisioning/dashboards/docker_host.json`, at line 480 :
 
 ```yaml
 "expr": "sum(node_filesystem_free_bytes{fstype=\"btrfs\"})",
