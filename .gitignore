@@ -4,3 +4,5 @@
 .idea/
 repository/
 packaging/.env
+ondewo_monitoring
+container_dependencies
