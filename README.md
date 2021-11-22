@@ -367,3 +367,22 @@ To run the grafana container as `user: 104` change your `docker-compose.yml` lik
     labels:
       org.label-schema.group: "monitoring"
 ```
+
+## Packaging the monitoring system
+
+Build the packaging image:
+```bash
+docker build -t ondewo_monitoring_test_1 -f packaging/package.Dockerfile .
+```
+
+Install the monitoring system on another machine:
+```bash
+docker run --mount "type=bind,source=`pwd`,target=/home/export" ondewo_monitoring_test_1
+```
+
+> Note: the installed folder will appear on the directory where you execute the command.
+
+Run the monitoring system:
+```bash
+docker-compose up -d
+```
