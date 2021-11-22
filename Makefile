@@ -5,17 +5,16 @@ export
 start:
 	docker-compose up -d
 
-build_dev:
+save_container_dependencies:
+	-mkdir container_dependencies
+	-rm container_dependencies/dependencies.tar.gz
+	docker save ${ORIG_PROMETHEUS_IMAGE_NAME} ${ORIG_ALERT_MANAGER_IMAGE_NAME} ${ORIG_NODE_EXPORTER_IMAGE_NAME} ${ORIG_CADVISOR_IMAGE_NAME} ${ORIG_GRAFANA_IMAGE_NAME} ${ORIG_PUSH_GATEWAY_IMAGE_NAME} ${ORIG_CADDY_IMAGE_NAME} | gzip > container_dependencies/dependencies.tar.gz
+
+build_dev: save_container_dependencies
 	docker build -t ${DEV_IMAGE_NAME} -f packaging/package.Dockerfile .
 
-build_prod:
+build_prod: save_container_dependencies
 	docker build -t ${PROD_IMAGE_NAME} -f packaging/package.Dockerfile .
-
-install_dev: build_dev
-	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME}
-
-install_prod: build_prod
-	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME}
 
 publish_dev: build_dev
 	echo "Publishing ${DEV_IMAGE_NAME}..."
@@ -24,6 +23,20 @@ publish_dev: build_dev
 publish_prod: build_prod
 	echo "Publishing ${PROD_IMAGE_NAME}..."
 	docker push ${PROD_IMAGE_NAME}
+
+install_dev:
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME}
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME} chmod -R 777 /home/export
+	gunzip -c container_dependencies/dependencies.tar.gz | docker load
+
+install_prod:
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME}
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME} chmod -R 777 /home/export
+	gunzip -c container_dependencies/dependencies.tar.gz | docker load
+
+# Optional: Only necessary if one desires to push all dependencies to a docker-registry
+start_packaged:
+	docker-compose -f docker-compose.packaging.yml --env-file packaging/example.env up -d
 
 publish_dependencies_prod:
 	docker pull ${ORIG_PROMETHEUS_IMAGE_NAME}
