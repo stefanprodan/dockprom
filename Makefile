@@ -26,12 +26,12 @@ publish_prod: build_prod
 
 install_dev:
 	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME}
-	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME} chmod -R 777 /home/export
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${DEV_IMAGE_NAME} chmod -R 777 /home/export/ondewo_monitoring
 	gunzip -c container_dependencies/dependencies.tar.gz | docker load
 
 install_prod:
 	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME}
-	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME} chmod -R 777 /home/export
+	docker run --mount "type=bind,source=`pwd`,target=/home/export" ${PROD_IMAGE_NAME} chmod -R 777 /home/export/ondewo_monitoring
 	gunzip -c container_dependencies/dependencies.tar.gz | docker load
 
 # Optional: Only necessary if one desires to push all dependencies to a docker-registry
