@@ -35,8 +35,8 @@ install_prod:
 	gunzip -c container_dependencies/dependencies.tar.gz | docker load
 
 # Optional: Only necessary if one desires to push all dependencies to a docker-registry
-start_packaged:
-	docker-compose -f docker-compose.packaging.yml --env-file packaging/example.env up -d
+start_with_published_dependencies:
+	docker-compose -f docker-compose.published_dependencies.yml --env-file packaging/example.env up -d
 
 publish_dependencies_prod:
 	docker pull ${ORIG_PROMETHEUS_IMAGE_NAME}
