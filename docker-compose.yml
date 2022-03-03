@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.6'
 
 networks:
   monitor-net:
@@ -9,7 +9,6 @@ volumes:
     grafana_data: {}
 
 services:
-
   prometheus:
     image: prom/prometheus:v2.32.1
     container_name: prometheus
