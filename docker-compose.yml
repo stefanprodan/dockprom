@@ -131,7 +131,5 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
     restart: unless-stopped
-    networks:
-      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
