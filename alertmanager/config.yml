@@ -1,11 +1,72 @@
+global:
+  resolve_timeout: 5m
+  opsgenie_api_url: "https://api.opsgenie.com/"
+  opsgenie_api_key: "[OPSGENIE_API_KEY]"
 route:
-    receiver: 'slack'
-
+  group_by: [alertname]
+  receiver: opsgenie_normal_receiver
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 15m
+  routes:
+  - receiver: opsgenie_critical_receiver
+    match:
+      severity: critical
+      alerting: opsgenie
+    routes:
+    - receiver: opsgenie_statuspage_critical_receiver
+      match:
+        status_page: update
+  - receiver: opsgenie_warning_receiver
+    match:
+      severity: warning
+      alerting: opsgenie
+    routes:
+    - receiver: opsgenie_statuspage_warning_receiver
+      match:
+        status_page: update
+  - receiver: opsgenie_normal_receiver
+    match:
+      severity: normal
+      alerting: opsgenie
+    routes:
+    - receiver: opsgenie_statuspage_normal_receiver
+      match:
+        status_page: update
 receivers:
-    - name: 'slack'
-      slack_configs:
-          - send_resolved: true
-            text: "{{ .CommonAnnotations.description }}"
-            username: 'Prometheus'
-            channel: '#<channel-name>'
-            api_url: 'https://hooks.slack.com/services/<webhook-id>'
+- name: opsgenie_critical_receiver
+  opsgenie_configs:
+  - priority: P1
+    tags: 'Prometheus'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
+- name: opsgenie_warning_receiver
+  opsgenie_configs:
+  - priority: P2
+    tags: 'Prometheus'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
+- name: opsgenie_normal_receiver
+  opsgenie_configs:
+  - priority: P3
+    tags: 'Prometheus'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
+- name: opsgenie_statuspage_critical_receiver
+  opsgenie_configs:
+  - priority: P1
+    tags: 'Prometheus,Statuspage'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
+- name: opsgenie_statuspage_warning_receiver
+  opsgenie_configs:
+  - priority: P2
+    tags: 'Prometheus,Statuspage'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
+- name: opsgenie_statuspage_normal_receiver
+  opsgenie_configs:
+  - priority: P3
+    tags: 'Prometheus,Statuspage'
+    message: '{{.CommonAnnotations.summary}}'
+    description: '{{.CommonAnnotations.description}}'
