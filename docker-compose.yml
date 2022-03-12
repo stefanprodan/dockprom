@@ -23,8 +23,8 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    expose:
-      - 9090
+    ports:
+      - 9090:9090
     labels:
       org.label-schema.group: "monitoring"
 
@@ -104,6 +104,18 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
+  yace:
+    image: ghcr.io/nerdswords/yet-another-cloudwatch-exporter:v0.33.0-alpha
+    container_name: yace
+    restart: unless-stopped
+    volumes:
+      - ./.aws/credentials:/exporter/.aws/credentials
+      - ./yace/config.yml:/tmp/config.yml
+    ports:
+      - "5000:5000"
+    labels:
+      org.label-schema.group: "monitoring"  
+      
   caddy:
     image: caddy:2.3.0
     container_name: caddy
@@ -121,3 +133,21 @@ services:
     restart: unless-stopped
     labels:
       org.label-schema.group: "monitoring"
+
+#  prom2kafka:
+#    container_name: prom2kafka
+#    image: ritubajaj89/prom2kafka:latest
+#    command:
+#      - --kafka-brokers=kafka1.stg.techmon.emea.kaas.3stripes.net:9093,kafka2.stg.techmon.emea.kaas.3stripes.net:9093
+#      - --kafka-topic=57e99aa6-8f8f-43e1-bd49-b4db282d1cdd.metrics
+#     - --httpListenAddr=:9201
+#     - --ca-file=/etc/prom2kafka/ca.pem
+#     - --key-file=/etc/prom2kafka/client.key
+#     - --cert-file=/etc/prom2kafka/client.pem
+#     - --batch-size=1000  
+#    volumes:
+#      - ./certs:/etc/prom2kafka
+#    ports:
+#      - 9201:9201
+#    restart: always
+
