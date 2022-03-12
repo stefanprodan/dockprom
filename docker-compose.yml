@@ -111,8 +111,8 @@ services:
     volumes:
       - ./.aws/credentials:/exporter/.aws/credentials
       - ./yace/config.yml:/tmp/config.yml
-    ports:
-      - "5000:5000"
+    expose:
+      - 3000
     labels:
       org.label-schema.group: "monitoring"  
       

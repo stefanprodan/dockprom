@@ -38,7 +38,7 @@ scrape_configs:
     scrape_interval: 5s
     honor_labels: true
     static_configs:
-      - targets: ['localhost:5000']    
+      - targets: ['yace:5000']    
 
 
 alerting:
