@@ -3,32 +3,33 @@ discovery:
   exportedTagsOnMetrics:
     ec2:
       - Name
+      - Monitoring
     ebs:
       - VolumeId
   jobs:
-  - type: es
+  - type: ec2
     regions:
       - eu-west-1
     searchTags:
-      - key: type
-        value: ^(easteregg|k8s)$
+      - key: Monitoring
+        value: HOLMES
     metrics:
-      - name: FreeStorageSpace
+      - name: CPUUtilization
         statistics:
         - Sum
         period: 60
         length: 600
-      - name: ClusterStatus.green
+      - name: DiskReadBytes
         statistics:
         - Minimum
         period: 60
         length: 600
-      - name: ClusterStatus.yellow
+      - name: NetworkPacketsIn
         statistics:
         - Maximum
         period: 60
         length: 600
-      - name: ClusterStatus.red
+      - name: NetworkOut
         statistics:
         - Maximum
         period: 60
