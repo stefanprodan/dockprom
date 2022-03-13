@@ -112,7 +112,7 @@ services:
       - ./.aws/credentials:/exporter/.aws/credentials
       - ./yace/config.yml:/tmp/config.yml
     expose:
-      - 3000
+      - 5000
     labels:
       org.label-schema.group: "monitoring"  
       
