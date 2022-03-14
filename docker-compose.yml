@@ -109,7 +109,7 @@ services:
     container_name: yace
     restart: unless-stopped
     volumes:
-      - ./.aws/credentials:/exporter/.aws/credentials
+#      - ./.aws/credentials:/exporter/.aws/credentials
       - ./yace/config.yml:/tmp/config.yml
     expose:
       - 5000
@@ -136,20 +136,20 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-#  prom2kafka:
-#    container_name: prom2kafka
-#    image: ritubajaj89/prom2kafka:latest
-#    command:
-#      - --kafka-brokers=kafka1.stg.techmon.emea.kaas.3stripes.net:9093,kafka2.stg.techmon.emea.kaas.3stripes.net:9093
-#      - --kafka-topic=57e99aa6-8f8f-43e1-bd49-b4db282d1cdd.metrics
-#     - --httpListenAddr=:9201
-#     - --ca-file=/etc/prom2kafka/ca.pem
-#     - --key-file=/etc/prom2kafka/client.key
-#     - --cert-file=/etc/prom2kafka/client.pem
-#     - --batch-size=1000  
-#    volumes:
-#      - ./certs:/etc/prom2kafka
-#    ports:
-#      - 9201:9201
-#    restart: always
+  prom2kafka:
+    container_name: prom2kafka
+    image: ritubajaj89/prom2kafka:latest
+    command:
+      - --kafka-brokers=kafka1.stg.techmon.emea.kaas.3stripes.net:9093,kafka2.stg.techmon.emea.kaas.3stripes.net:9093
+      - --kafka-topic=57e99aa6-8f8f-43e1-bd49-b4db282d1cdd.metrics
+      - --httpListenAddr=:9201
+      - --ca-file=/etc/prom2kafka/ca.pem
+      - --key-file=/etc/prom2kafka/client.key
+      - --cert-file=/etc/prom2kafka/client.pem
+      - --batch-size=1000  
+    volumes:
+      - ./certs:/etc/prom2kafka
+    ports:
+      - 9201:9201
+    restart: always
 
