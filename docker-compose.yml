@@ -124,6 +124,7 @@ services:
       - "9093:9093"
       - "9091:9091"
       - "5000:5000"
+      - "9201:9201"
     volumes:
       - ./caddy:/etc/caddy
     environment:
@@ -143,13 +144,15 @@ services:
       - --kafka-brokers=kafka1.stg.techmon.emea.kaas.3stripes.net:9093,kafka2.stg.techmon.emea.kaas.3stripes.net:9093
       - --kafka-topic=57e99aa6-8f8f-43e1-bd49-b4db282d1cdd.metrics
       - --httpListenAddr=:9201
-      - --ca-file=/etc/prom2kafka/ca.pem
+      - --ca-file=/etc/prom2kafka/ca.crt
       - --key-file=/etc/prom2kafka/client.key
-      - --cert-file=/etc/prom2kafka/client.pem
+      - --cert-file=/etc/prom2kafka/cert.pem
       - --batch-size=1000  
     volumes:
       - ./prom2kafka/certs:/etc/prom2kafka
     ports:
       - 9201:9201
     restart: always
+    labels:
+      org.label-schema.group: "monitoring"
 
