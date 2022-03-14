@@ -150,8 +150,8 @@ services:
       - --batch-size=1000  
     volumes:
       - ./prom2kafka/certs:/etc/prom2kafka
-    ports:
-      - 9201:9201
+    expose:
+      - 9201
     restart: always
     labels:
       org.label-schema.group: "monitoring"
