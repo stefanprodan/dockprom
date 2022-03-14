@@ -48,6 +48,12 @@ scrape_configs:
     static_configs:
       - targets: ['yace:5000']    
 
+  - job_name: 'prom2kafka'
+    scrape_interval: 5s
+    honor_labels: true
+    static_configs:
+      - targets: ['prom2kafka:9201']        
+
 
 alerting:
   alertmanagers:
