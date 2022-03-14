@@ -5,7 +5,8 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'docker-host-alpha'
+    leanix: 57e99aa6-8f8f-43e1-bd49-b4db282d1cdd
+    environment: staging
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
