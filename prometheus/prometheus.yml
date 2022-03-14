@@ -8,6 +8,13 @@ global:
     leanix: 57e99aa6-8f8f-43e1-bd49-b4db282d1cdd
     environment: staging
 
+remote_write:
+  - url: "http://prom2kafka:9201/write"
+    queue_config:
+      max_samples_per_send: 1000
+      capacity: 5000
+      max_shards: 30    
+
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
   - "alert.rules"
