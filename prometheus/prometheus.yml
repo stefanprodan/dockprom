@@ -5,8 +5,8 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-    leanix: 57e99aa6-8f8f-43e1-bd49-b4db282d1cdd
-    environment: staging
+    leanix: "{{ leanix }}"
+    environment: "{{ environment }}"
 
 remote_write:
   - url: "http://prom2kafka:9201/write"
@@ -52,7 +52,13 @@ scrape_configs:
     scrape_interval: 5s
     honor_labels: true
     static_configs:
-      - targets: ['prom2kafka:9201']        
+      - targets: ['prom2kafka:9201']    
+
+  - job_name: 'blackbox'
+    scrape_interval: 5s
+    honor_labels: true
+    static_configs:
+      - targets: ['blackbox:9115']        
 
 
 alerting:

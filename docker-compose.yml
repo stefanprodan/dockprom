@@ -115,6 +115,18 @@ services:
       - 5000
     labels:
       org.label-schema.group: "monitoring"  
+
+  blackbox_exporter:
+    container_name: blackbox-exporter
+    image: quay.io/prometheus/blackbox-exporter
+    expose:
+      - 9115
+    restart: unless-stopped
+    volumes:
+      - ./blackboxexporter/config.yml:/config/blackbox.yml
+    command: --config.file=/config/blackbox.yml  
+    labels:
+      org.label-schema.group: "monitoring"    
       
   caddy:
     image: caddy:2.3.0

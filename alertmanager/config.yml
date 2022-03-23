@@ -1,7 +1,7 @@
 global:
   resolve_timeout: 5m
   opsgenie_api_url: "https://api.opsgenie.com/"
-  opsgenie_api_key: "[OPSGENIE_API_KEY]"
+  opsgenie_api_key: "{{ OPSGENIE_API_KEY }}"
 route:
   group_by: [alertname]
   receiver: opsgenie_normal_receiver
