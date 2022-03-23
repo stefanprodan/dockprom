@@ -2,11 +2,14 @@
 sudo yum -y update
 
 if ! type "docker" > /dev/null; then
-  echo "Installing Docker"
+  echo "Installing Docker and docker-compose"
   sudo yum update -y
   sudo yum install -y docker
   sudo systemctl start docker
   sudo usermod -a -G docker ec2-user
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 fi
 
@@ -33,13 +36,14 @@ echo "Cloning Project"
 git clone https://github.com/ritubajaj89/dockprom.git
 cd "$DIRECTORY"
 
-echo "Making Utility scripts executable"
-chmod +x ./util/*.sh
+#echo "Making Utility scripts executable"
+#chmod +x ./util/*.sh
 
 sed 
 
 echo "Starting Application"
-docker stack deploy -c docker-compose.yml prom
+#docker stack deploy -c docker-compose.yml prom
+sudo docker-compose up -d
 
 echo "Waiting 5 seconds for services to come up"
 sleep 5
