@@ -3,7 +3,7 @@ discovery:
   exportedTagsOnMetrics:
     ec2:
       - Name
-      - Monitoring
+#      - Monitoring
     ebs:
       - VolumeId
   jobs:
