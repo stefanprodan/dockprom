@@ -111,8 +111,8 @@ services:
     volumes:
 #      - ./.aws/credentials:/exporter/.aws/credentials
       - ./yace/config.yml:/tmp/config.yml
-    expose:
-      - 5000
+    ports:
+      - 5000:5000
     labels:
       org.label-schema.group: "monitoring"  
 
@@ -135,7 +135,7 @@ services:
       - "3000:3000"
       - "9093:9093"
       - "9091:9091"
-      - "5000:5000"
+#      - "5000:5000"
       - "9201:9201"
     volumes:
       - ./caddy:/etc/caddy
