@@ -1,0 +1,70 @@
+  - type: ngw
+    regions:
+    - eu-west-1
+    metrics:
+      - name: ActiveConnectionCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: BytesInFromDestination
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: BytesInFromSource
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: BytesOutToDestination
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: BytesOutToSource
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ConnectionAttemptCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ConnectionEstablishedCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: IdleTimeoutCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PacketsDropCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PacketsInFromDestination
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PacketsInFromSource
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PacketsOutToDestination
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PacketsOutToSource
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+

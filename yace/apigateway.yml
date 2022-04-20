@@ -1,0 +1,42 @@
+  - type: apigateway
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: Count
+        statistics:
+        - SampleCount
+        period: 300
+        length: 3600
+      - name: Latency
+        statistics:
+        - Average
+        - p95
+        period: 300
+        length: 3600
+      - name: 4XXError
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: IntegrationLatency
+        statistics:
+        - Average
+        - p95
+        period: 300
+        length: 3600
+      - name: 5XXError
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: CacheHitCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: CacheMissCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+

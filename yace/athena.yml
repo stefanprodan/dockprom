@@ -1,0 +1,20 @@
+  - type: athena
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: ProcessedBytes
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: TotalExecutionTime
+        statistics:
+        - Average
+        - Maximum
+        period: 300
+        length: 3600
+      - name: Total
+        statistics:
+        - Sum
+        period: 300
+        length: 3600

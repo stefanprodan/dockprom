@@ -1,0 +1,73 @@
+  - type: lambda
+    regions:
+    - eu-west-1
+    metrics:
+      - name: Duration
+        statistics:
+        - Sum
+        - Maximum
+        - Minimum
+        - Average
+        period: 300
+        length: 3600
+      - name: Invocations
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: Errors
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: Throttles
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DeadLetterErrors
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DestinationDeliveryFailures
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ProvisionedConcurrencyInvocations
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ProvisionedConcurrencySpilloverInvocations
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: IteratorAge
+        statistics:
+        - Average
+        - Maximum
+        period: 300
+        length: 3600
+      - name: ConcurrentExecutions
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ProvisionedConcurrentExecutions
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ProvisionedConcurrencyUtilization
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: UnreservedConcurrentExecutions
+        statistics:
+        - Sum
+        period: 300
+        length: 3600

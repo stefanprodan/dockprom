@@ -1,0 +1,36 @@
+  - type: route53
+    regions:
+    - eu-west-1    
+    awsDimensions:
+      - HealthCheckId
+    metrics:
+      - name: TimeToFirstByte
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: HealthCheckPercentageHealthy
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: HealthCheckStatus
+        statistics:
+        - Minimum
+        period: 300
+        length: 3600
+      - name: ChildHealthCheckHealthyCount
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ConnectionTime
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: SSLHandshakeTime
+        statistics:
+        - Average
+        period: 300
+        length: 3600

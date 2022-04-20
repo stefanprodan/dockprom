@@ -1,0 +1,133 @@
+  - type: rds
+    regions:
+    - us-east-1
+    enableMetricData: true
+    metrics:
+      - name: BinLogDiskUsage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: BurstBalance
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: CPUUtilization
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: CPUCreditUsage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: CPUCreditBalance
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: DatabaseConnections
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: DiskQueueDepth
+        statistics:
+        - Average
+        - Maximum
+        period: 300
+        length: 3600
+      - name: FailedSQLServerAgentJobsCount
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: FreeableMemory
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: FreeStorageSpace
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: MaximumUsedTransactionIDs
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: NetworkReceiveThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: NetworkTransmitThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: OldestReplicationSlotLag
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ReadIOPS
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ReadLatency
+        statistics:
+        - Maximum
+        - Average
+        period: 300
+        length: 3600
+      - name: ReadThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ReplicaLag
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ReplicationSlotDiskUsage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: SwapUsage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: TransactionLogsDiskUsage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: TransactionLogsGeneration
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: WriteIOPS
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: WriteLatency
+        statistics:
+        - Maximum
+        - Average
+        period: 300
+        length: 3600
+      - name: WriteThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600

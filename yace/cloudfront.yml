@@ -1,0 +1,37 @@
+  - type: cloudfront
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: Requests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: BytesDownloaded
+        statistics:
+        - Average
+        - Sum
+        period: 300
+        length: 3600
+      - name: BytesUploaded
+        statistics:
+        - Average
+        - Sum
+        period: 300
+        length: 3600
+      - name: 4xxErrorRate
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: 5xxErrorRate
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: TotalErrorRate
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+

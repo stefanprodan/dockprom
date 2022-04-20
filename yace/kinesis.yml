@@ -1,0 +1,40 @@
+  - type: kinesis
+    regions:
+      - eu-west-1
+    metrics:
+      - name: GetRecords.IteratorAgeMilliseconds
+        statistics:
+        - Maximum
+        period: 60
+        length: 600
+      - name: ReadProvisionedThroughputExceeded
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: WriteProvisionedThroughputExceeded
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: PutRecord.Success
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: PutRecords.Success
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: GetRecords.Success
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: PutRecords.Latency
+        statistics:
+        - Average
+        - p95
+        period: 60
+        length: 600

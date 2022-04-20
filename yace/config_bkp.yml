@@ -1,0 +1,155 @@
+apiVersion: v1alpha1
+discovery:
+  exportedTagsOnMetrics:
+    ec2:
+      - Name
+    ebs:
+      - VolumeId
+    s3:
+      - BucketName        
+  jobs:
+  - type: ec2
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: Monitoring
+        value: HOLMES
+    metrics:
+      - name: CPUUtilization
+        statistics:
+        - Sum
+        period: 60
+        length: 600
+      - name: DiskReadBytes
+        statistics:
+        - Minimum
+        period: 60
+        length: 600
+      - name: NetworkPacketsIn
+        statistics:
+        - Maximum
+        period: 60
+        length: 600
+      - name: NetworkOut
+        statistics:
+        - Maximum
+        period: 60
+        length: 600
+  - type: elb
+    regions:
+      - eu-west-1
+    length: 900
+    delay: 120
+    statistics:
+      - Minimum
+      - Maximum
+      - Sum
+    searchTags:
+      - key: KubernetesCluster
+        value: production-19
+    metrics:
+      - name: HealthyHostCount
+        statistics:
+        - Minimum
+        period: 600
+        length: 600 #(this will be ignored)
+      - name: HTTPCode_Backend_4XX
+        statistics:
+        - Sum
+        period: 60
+        length: 900 #(this will be ignored)
+        delay: 300 #(this will be ignored)
+        nilToZero: true
+      - name: HTTPCode_Backend_5XX
+        period: 60
+  - type: alb
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: kubernetes.io/service-name
+        value: .*
+    metrics:
+      - name: UnHealthyHostCount
+        statistics: [Maximum]
+        period: 60
+        length: 600
+  - type: vpn
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: kubernetes.io/service-name
+        value: .*
+    metrics:
+      - name: TunnelState
+        statistics:
+        - p90
+        period: 60
+        length: 300
+  - type: kinesis
+    regions:
+      - eu-west-1
+    metrics:
+      - name: PutRecords.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+  - type: s3
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: type
+        value: public
+    metrics:
+      - name: NumberOfObjects
+        statistics:
+          - Average
+        period: 86400
+        length: 172800
+      - name: BucketSizeBytes
+        statistics:
+          - Average
+        period: 86400
+        length: 172800
+  - type: ebs
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: type
+        value: public
+    metrics:
+      - name: BurstBalance
+        statistics:
+        - Minimum
+        period: 600
+        length: 600
+        addCloudwatchTimestamp: true
+  - type: kafka
+    regions:
+      - eu-west-1
+    searchTags:
+      - key: env
+        value: dev
+    metrics:
+      - name: BytesOutPerSec
+        statistics:
+        - Average
+        period: 600
+        length: 600
+static:
+  - namespace: AWS/AutoScaling
+    name: must_be_set
+    regions:
+      - eu-west-1
+    dimensions:
+     - name: AutoScalingGroupName
+       value: Test
+    customTags:
+      - key: CustomTag
+        value: CustomValue
+    metrics:
+      - name: GroupInServiceInstances
+        statistics:
+        - Minimum
+        period: 60
+        length: 300

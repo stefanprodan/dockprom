@@ -1,0 +1,34 @@
+  - type: s3
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: DDoSDetected
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DDoSAttackBitsPerSecond
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DDoSAttackPacketsPerSecond
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DDoSAttackRequestsPerSecond
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: VolumePacketsPerSecond
+        statistics:
+       - Sum
+        period: 300
+        length: 3600
+      - name: VolumeBitsPerSecond
+        statistics:
+        - Sum
+        period: 300
+        length: 3600

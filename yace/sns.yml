@@ -1,0 +1,40 @@
+  - type: sns
+    regions: 
+    - eu-west-1
+    enableMetricData: true
+    metrics: 
+      - name: : NumberOfMessagesPublished
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: NumberOfNotificationsDelivered
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: NumberOfNotificationsFailed
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PublishSize
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: NumberOfNotificationsFilteredOut
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: NumberOfNotificationsFilteredOut-InvalidAttributes
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: NumberOfNotificationsFilteredOut-NoMessageAttributes
+        statistics:
+        - Sum
+        period: 300
+        length: 3600

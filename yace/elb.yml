@@ -1,0 +1,80 @@
+  - type: elb
+    regions:
+    - us-east-1
+    metrics:
+      - name: BackendConnectionErrors
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HealthyHostCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Backend_2XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Backend_3XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Backend_4XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Backend_5XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_4XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_5XX
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: Latency
+        statistics:
+        - Average
+        - p95
+        period: 300
+        length: 3600
+      - name: RequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: SpilloverCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: SurgeQueueLength
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: UnHealthyHostCount
+        statistics:
+        - Minimum
+        period: 300
+        length: 3600
+        nilToZero: true

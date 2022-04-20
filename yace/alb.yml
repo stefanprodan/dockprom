@@ -1,0 +1,241 @@
+  - type: alb
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: ActiveConnectionCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ClientTLSNegotiationErrorCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ConsumedLCUs
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: HTTP_Fixed_Response_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTP_Redirect_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTP_Redirect_Url_Limit_Exceeded_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_3XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_4XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_5XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_500_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_502_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_503_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_ELB_504_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: IPv6ProcessedBytes
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: IPv6RequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: NewConnectionCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ProcessedBytes
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: RejectedConnectionCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: RequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: RuleEvaluations
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+
+      #- name: LambdaTargetProcessedBytes
+      #  statistics:
+      #  - Sum
+      #  period: 300
+      #  length: 3600
+
+      - name: ELBAuthError
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ELBAuthFailure
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ELBAuthLatency
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ELBAuthRefreshTokenSuccess
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ELBAuthSuccess
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ELBAuthUserClaimsSizeExceeded
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+  - type: alb
+    regions:
+    - eu-west-1    
+    awsDimensions:
+      - AvailabilityZone
+    metrics:
+      - name: DroppedInvalidHeaderRequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: ForwardedInvalidHeaderRequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+  - type: alb
+    regions:
+    - eu-west-1
+    awsDimensions:
+      - TargetGroup
+    metrics:
+      - name: HealthyHostCount
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: HTTPCode_Target_2XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Target_3XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Target_4XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HTTPCode_Target_5XX_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: NonStickyRequestCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: RequestCountPerTarget
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: TargetConnectionErrorCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: TargetResponseTime
+        statistics:
+        - p95
+        period: 300
+        length: 3600
+      - name: TargetTLSNegotiationErrorCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: UnHealthyHostCount
+        statistics:
+        - Average
+        period: 300
+        length: 3600

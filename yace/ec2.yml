@@ -1,0 +1,66 @@
+  - type: ec2
+    regions:
+      - eu-west-1
+    metrics:
+      - name: CPUUtilization
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: DiskReadBytes
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: DiskWriteBytes
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkIn
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkOut
+        statistics:
+        - Maximum
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkPacketsIn
+        statistics:
+        - Maximum
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkPacketsOut
+        statistics:
+        - Maximum
+        - Average
+        period: 60
+        length: 600
+      - name: CPUCreditBalance
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: CPUCreditUsage
+        statistics:
+        - Average
+        period: 60
+        length: 600      
+      - name: StatusCheckFailed
+        statistics:
+        - Sum
+        period: 60
+        length: 600
+      - name: StatusCheckFailed_Instance
+        statistics:
+        - Sum
+        period: 60
+        length: 600
+      - name: StatusCheckFailed_System
+        - Sum
+        period: 60
+        length: 600    

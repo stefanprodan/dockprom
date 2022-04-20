@@ -1,0 +1,68 @@
+  - type: ebs
+    regions:
+      - eu-west-1    
+    metrics:
+      - name: VolumeReadBytes
+        statistics:
+        - Sum
+        - Maximum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeWriteBytes
+        statistics:
+        - Sum
+        - Maximum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeReadOps
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeWriteOps
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeTotalReadTime
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeTotalWriteTime
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeIdleTime
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: VolumeQueueLength
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeThroughputPercentage
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: VolumeConsumedReadWriteOps
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: BurstBalance
+        statistics:
+        - Minimum
+        - Average
+        period: 300
+        length: 3600

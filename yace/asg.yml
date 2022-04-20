@@ -1,0 +1,44 @@
+  - type: asg
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: GroupTotalInstances
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupMaxSize
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupMinSize
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupTerminatingInstances
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupPendingInstances
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupStandbyInstances
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupDesiredCapacity
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: GroupInServiceInstances
+        statistics:
+        - Average
+        period: 300
+        length: 3600

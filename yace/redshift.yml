@@ -1,0 +1,73 @@
+  - type: redshift
+    regions:
+    - eu-west-1
+    enableMetricData: true
+    metrics:
+      - name: HealthStatus
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: DatabaseConnections
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: CPUUtilization
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: MaintenanceMode
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: NetworkTransmitThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ReadIOPS
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: WriteIOPS
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: ReadLatency
+        statistics:
+        - Maximum
+        - p95
+        period: 300
+        length: 3600
+      - name: RReadThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: WriteThroughput
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: WriteLatency
+        statistics:
+        - Maximum
+        - p95
+        period: 300
+        length: 3600
+      - name: QueryDuration
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: QueriesCompletedPerSecond
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+

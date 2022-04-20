@@ -1,0 +1,39 @@
+  - type: efs
+    regions:
+      - eu-west-1
+    metrics:
+      - name: ClientConnections
+        statistics:
+        - Sum
+        - Maximum
+        period: 300
+        length: 3600
+      - name: DataWriteIOBytes
+        statistics:
+        - Sum
+        - Maximum
+        - Average
+        period: 60
+        length: 600
+      - name: DataReadIOBytes
+        statistics:
+        - Sum
+        - Maximum
+        - Average
+        period: 60
+        length: 600
+      - name: PermittedThroughput
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: BurstCreditBalance
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: PercentIOLimit
+        statistics:
+        - Average
+        period: 300
+        length: 3600

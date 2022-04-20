@@ -1,0 +1,123 @@
+  - type: s3
+    regions:
+    - eu-west-1    
+    awsDimensions:
+      - FilterId
+      - BucketName
+    metrics:
+      - name: AllRequests
+        statistics:
+        - Average
+        - Sum
+        period: 300
+        length: 36000
+      - name: GetRequests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: PutRequests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: DeleteRequests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: HeadRequests
+        statistics:
+       - Sum
+        period: 300
+        length: 3600
+      - name: PostRequests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: SelectRequests
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+#      - name: SelectScannedBytes
+#        statistics:
+#          - Sum
+#        period: 300
+#        length: 3600
+#      - name: SelectReturnedBytes
+#        statistics:
+#          - Sum
+#        period: 300
+#        length: 3600
+#      - name: ListRequests
+#        statistics:
+#          - Sum
+#        period: 300
+#        length: 3600
+      - name: BytesDownloaded
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: BytesUploaded
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: 4xxErrors
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: 5xxErrors
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: FirstByteLatency
+        statistics:
+        - p95
+        - Average
+        period: 300
+        length: 3600
+      - name: TotalRequestLatency
+        statistics:
+        - p95
+        - Average
+        period: 300
+        length: 3600
+#      - name: ReplicationLatency
+#        statistics:
+#          - Maximum
+#        period: 300
+#        length: 3600
+#      - name: BytesPendingReplication
+#        statistics:
+#          - Maximum
+#        period: 300
+#        length: 3600
+#      - name: OperationsPendingReplication
+#        statistics:
+#          - Maximum
+#        period: 300
+#        length: 3600    
+      - name: NumberOfObjects
+        statistics:
+        - Average
+        period: 86400
+        length: 172800
+        additionalDimensions:
+        - name: StorageType
+          value: AllStorageTypes
+      - name: BucketSizeBytes
+        statistics:
+        - Average
+        period: 86400
+        length: 172800
+        additionalDimensions:
+        - name: StorageType
+          value: StandardStorage

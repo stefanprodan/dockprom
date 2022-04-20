@@ -1,0 +1,182 @@
+region: us-east-1
+metrics:
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: IncomingRecords
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: IncomingBytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: IncomingPutRequests
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: PutRecord.Latency
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: PutRecordBatch.Latency
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DataReadFromKinesisStream.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DataReadFromKinesisStream.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: ThrottledGetRecords
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: SucceedProcessing.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: SucceedProcessing.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: ExecuteProcessing.Duration
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: ExecuteProcessing.Success
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToS3.Success
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToS3.DataFreshness
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToS3.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToS3.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToElasticsearch.Success
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToElasticsearch.DataFreshness
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToElasticsearch.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToElasticsearch.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToRedshift.Success
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToRedshift.DataFreshness
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToRedshift.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToRedshift.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.Success
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.DataFreshness
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.Records
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.ProcessedRecords
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.Bytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - DeliveryStreamName
+  aws_metric_name: DeliveryToHttpEndpoint.ProcessedBytes
+  aws_namespace: AWS/Firehose
+  aws_statistics:
+  - Sum

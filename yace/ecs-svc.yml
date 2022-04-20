@@ -1,0 +1,29 @@
+  - type: ecs-svc
+    regions:
+      - eu-west-1
+    metrics:
+      - name: CPUUtilization
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: MemoryUtilization
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: GPUReservation
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: CPUReservation
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: MemoryReservation
+        statistics:
+        - Average
+        period: 60
+        length: 600

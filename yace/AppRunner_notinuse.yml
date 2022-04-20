@@ -1,0 +1,46 @@
+region: us-east-1
+metrics:
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: Requests
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: 2xxStatusResponses
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: 4xxStatusResponses
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: 5xxStatusResponses
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: ActiveConnections
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: DroppedConnections
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Sum]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: RequestLatency
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Average]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: ActiveInstances
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Average]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: ProvisionedInstances
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Average]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: CPUUtilization
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Average]
+- aws_namespace: AWS/AppRunner
+  aws_metric_name: MemoryUtilization
+  aws_dimensions: [ServiceID, ServiceName]
+  aws_statistics: [Average]

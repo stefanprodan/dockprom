@@ -1,0 +1,178 @@
+region: us-east-1
+metrics:
+- aws_dimensions:
+  - Region
+  - Rule
+  - RuleGroup
+  - WebACL
+  aws_metric_name: AllowedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - Rule
+  - RuleGroup
+  - WebACL
+  aws_metric_name: BlockedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - Rule
+  - RuleGroup
+  - WebACL
+  aws_metric_name: CountedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - Rule
+  - RuleGroup
+  - WebACL
+  aws_metric_name: PassedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - RuleGroup
+  - WebACL
+  - LabelNamespace
+  - Label
+  aws_metric_name: AllowedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - RuleGroup
+  - WebACL
+  - LabelNamespace
+  - Label
+  aws_metric_name: BlockedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - RuleGroup
+  - WebACL
+  - LabelNamespace
+  - Label
+  aws_metric_name: CountedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - BotCategory
+  - WebACL
+  aws_metric_name: SampleAllowedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - Region
+  - BotCategory
+  - WebACL
+  aws_metric_name: SampleBlockedRequests
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  aws_metric_name: DDoSDetected
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ACKFlood
+  - ChargenReflection
+  - DNSReflection
+  - GenericUDPReflection
+  - MemcachedReflection
+  - MSSQLReflection
+  - NetBIOSReflection
+  - NTPReflection
+  - PortMapper
+  - RequestFlood
+  - RIPReflection
+  - SNMPReflection
+  - SSDPReflection
+  - SYNFlood
+  - UDPFragment
+  - UDPTraffic
+  - UDPReflection
+  aws_metric_name: DDoSAttackBitsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ACKFlood
+  - ChargenReflection
+  - DNSReflection
+  - GenericUDPReflection
+  - MemcachedReflection
+  - MSSQLReflection
+  - NetBIOSReflection
+  - NTPReflection
+  - PortMapper
+  - RequestFlood
+  - RIPReflection
+  - SNMPReflection
+  - SSDPReflection
+  - SYNFlood
+  - UDPFragment
+  - UDPTraffic
+  - UDPReflection
+  aws_metric_name: DDoSAttackPacketsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ACKFlood
+  - ChargenReflection
+  - DNSReflection
+  - GenericUDPReflection
+  - MemcachedReflection
+  - MSSQLReflection
+  - NetBIOSReflection
+  - NTPReflection
+  - PortMapper
+  - RequestFlood
+  - RIPReflection
+  - SNMPReflection
+  - SSDPReflection
+  - SYNFlood
+  - UDPFragment
+  - UDPTraffic
+  - UDPReflection
+  aws_metric_name: DDoSAttackRequestsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ResourceArn
+  - MitigationAction
+  aws_metric_name: VolumePacketsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ResourceArn
+  - Protocol
+  - SourceIp
+  aws_metric_name: VolumePacketsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum
+- aws_dimensions:
+  - ResourceArn
+  - Protocol
+  - SourceIp
+  aws_metric_name: VolumeBitsPerSecond
+  aws_namespace: AWS/WAF
+  aws_statistics:
+  - Sum

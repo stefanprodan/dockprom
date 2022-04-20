@@ -1,0 +1,90 @@
+  - type: ecs-containerinsights
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: ContainerInstanceCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: ServiceCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+  - type: ecs-containerinsights
+    regions:
+    - eu-west-1
+    awsDimensions:
+      - ServiceName
+    metrics:
+      - name: CpuReserved
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: CpuUtilized
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: MemoryReserved
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: MemoryUtilized
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: StorageReadBytes
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: StorageWriteBytes
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: NetworkRxBytes
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: NetworkTxBytes
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: DesiredTaskCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: TaskCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: PendingTaskCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: RunningTaskCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: DeploymentCount
+        statistics:
+        - Average
+        period: 60
+        length: 300
+      - name: TaskSetCount
+        statistics:
+        - Average
+        period: 60
+        length: 300

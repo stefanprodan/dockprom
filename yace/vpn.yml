@@ -1,0 +1,33 @@
+  - type: vpn
+    regions: 
+    - eu-west-1
+    metrics: 
+      - name: TunnelState
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: TunnelDataIn
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+      - name: TunnelDataOut
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

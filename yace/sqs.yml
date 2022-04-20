@@ -1,0 +1,55 @@
+  - type: sqs
+    regions: 
+    - eu-west-1
+    enableMetricData: true
+    metrics: 
+      - name: ApproximateAgeOfOldestMessage
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: ApproximateNumberOfMessagesDelayed
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ApproximateNumberOfMessagesNotVisible
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ApproximateNumberOfMessagesVisible
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: NumberOfEmptyReceives
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: NumberOfMessagesDeleted
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: NumberOfMessagesReceived
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: NumberOfMessagesSent
+        statistics:
+        - Sum
+        - Average
+        period: 300
+        length: 3600
+      - name: SentMessageSize
+        statistics:
+        - Average
+        - Sum
+        period: 300
+        length: 3600

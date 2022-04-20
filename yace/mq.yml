@@ -1,0 +1,113 @@
+  - type: mq
+    regions:
+    - eu-west-1    
+    metrics:
+      - name: TotalProducerCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: TotalConsumerCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: JournalFilesForFullRecovery
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600        
+      - name: JournalFilesForFastRecovery
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: HeapUsage
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: CpuUtilization
+        statistics:
+        - Maximum
+        - Average
+        period: 300
+        length: 3600        
+      - name: TotalConsumerCount
+        statistics:
+        - SampleCount
+        period: 300
+        length: 3600
+      - name: StorePercentUsage
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600       
+      - name: NetworkIn
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: NetworkOut
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+  - type: mq
+    regions:
+    - eu-west-1
+    awsDimensions:
+      - Broker
+      - Topic
+      - Queue
+    metrics:
+      - name: QueueSize
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600      
+      - name: ConsumerCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600            
+      - name: DispatchCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: ProducerCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600        
+      - name: ReceiveCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: EnqueueCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600        
+      - name: DequeueCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: ExpiredCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: EnqueueTime
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+      - name: MemoryUsage
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
