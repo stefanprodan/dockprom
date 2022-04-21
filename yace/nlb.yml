@@ -1,0 +1,134 @@
+  - type: alb
+    regions:
+    - eu-west-1   
+    aws_dimensions:
+      - AvailabilityZone
+      - LoadBalancer
+      - TargetGroup 
+    metrics:
+      - name: ActiveFlowCount
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ActiveFlowCount_TCP
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ActiveFlowCount_UDP
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ClientTLSNegotiationErrorCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: HealthyHostCount
+        statistics:
+        - Minimum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: NewFlowCount_TCP
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: NewFlowCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: NewFlowCount_TLS
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: NewFlowCount_UDP
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ProcessedBytes
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ProcessedBytes_TLS
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ProcessedBytes_UDP
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: ProcessedPackets
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: TargetTLSNegotiationErrorCount
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: TCP_Client_Reset_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: TCP_Target_Reset_Count
+        statistics:
+        - Sum
+        period: 300
+        length: 3600
+        nilToZero: true
+      - name: UnHealthyHostCount
+        statistics:
+        - Maximum
+        period: 300
+        length: 3600
+        nilToZero: true
+  - type: alb
+    regions:
+    - eu-west-1   
+    aws_dimensions:
+      - LoadBalancer
+    metrics:
+      - name: ConsumedLCUs
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ConsumedLCUs_TCP
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ConsumedLCUs_TLS
+        statistics:
+        - Average
+        period: 300
+        length: 3600
+      - name: ConsumedLCUs_UDP
+        statistics:
+        - Average
+        period: 300
+        length: 3600
