@@ -1,212 +1,154 @@
-region: us-east-1
-metrics:
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CPUUtilization
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CPUCreditBalance
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: FreeableMemory
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: NetworkBytesIn
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: NetworkBytesOut
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SwapUsage
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CacheHits
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CacheMisses
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CurrConnections
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: NewConnections
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: GetTypeCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SetTypeCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: EngineCPUUtilization
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: BytesUsedForCache
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: HashBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: HyperLogLogBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: KeyBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: ListBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SetBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SetTypeCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SortedSetBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: StringBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: StreamBasedCmds
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: CurrItems
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: ActiveDefragHits
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: Evictions
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: Reclaimed
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: SaveInProgress
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: ReplicationLag
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
-- aws_dimensions:
-  - CacheNodeId
-  - CacheClusterId
-  aws_metric_name: ReplicationBytes
-  aws_namespace: AWS/ElastiCache
-  aws_statistics:
-  - Average
+  - type: ec
+    regions:
+    - eu-west-1
+    metrics:
+      - name: CPUUtilization
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: CPUCreditBalance
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: FreeableMemory
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkBytesIn
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: NetworkBytesOut
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: SwapUsage
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: CacheHits
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: CacheMisses
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: CurrConnections
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: NewConnections
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: GetTypeCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: SetTypeCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: EngineCPUUtilization
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: BytesUsedForCache
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: HashBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: HyperLogLogBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: KeyBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: ListBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: SetBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: SetTypeCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: SortedSetBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600       
+      - name: StringBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: StreamBasedCmds
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: CurrItems
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: ActiveDefragHits
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: Evictions
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: Reclaimed
+        statistics:
+        - Average
+        period: 60
+        length: 600        
+      - name: SaveInProgress
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: ReplicationLag
+        statistics:
+        - Average
+        period: 60
+        length: 600
+      - name: ReplicationBytes
+        statistics:
+        - Average
+        period: 60
+        length: 600        

@@ -1,182 +1,155 @@
-region: us-east-1
-metrics:
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: IncomingRecords
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: IncomingBytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: IncomingPutRequests
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: PutRecord.Latency
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: PutRecordBatch.Latency
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DataReadFromKinesisStream.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DataReadFromKinesisStream.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: ThrottledGetRecords
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: SucceedProcessing.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: SucceedProcessing.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: ExecuteProcessing.Duration
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: ExecuteProcessing.Success
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToS3.Success
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToS3.DataFreshness
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToS3.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToS3.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToElasticsearch.Success
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToElasticsearch.DataFreshness
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToElasticsearch.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToElasticsearch.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToRedshift.Success
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToRedshift.DataFreshness
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToRedshift.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToRedshift.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.Success
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.DataFreshness
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.Records
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.ProcessedRecords
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.Bytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
-- aws_dimensions:
-  - DeliveryStreamName
-  aws_metric_name: DeliveryToHttpEndpoint.ProcessedBytes
-  aws_namespace: AWS/Firehose
-  aws_statistics:
-  - Sum
+
+ - type: firehose
+    regions:
+      - eu-west-1
+    metrics:
+      - name: IncomingRecords
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: IncomingBytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: IncomingPutRequests
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: PutRecord.Latency
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: PutRecordBatch.Latency
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DataReadFromKinesisStream.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DataReadFromKinesisStream.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: ThrottledGetRecords
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: SucceedProcessing.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DSucceedProcessing.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: ExecuteProcessing.Duration
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: ExecuteProcessing.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToS3.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToS3.DataFreshness
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToS3.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToS3.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToElasticsearch.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToElasticsearch.DataFreshness
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToElasticsearch.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToElasticsearch.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToRedshift.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToRedshift.DataFreshness
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToRedshift.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToRedshift.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.Success
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.DataFreshness
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.Records
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.ProcessedRecords
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.Bytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300
+      - name: DeliveryToHttpEndpoint.ProcessedBytes
+        statistics:
+        - Sum
+        period: 60
+        length: 300

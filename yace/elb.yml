@@ -1,6 +1,6 @@
   - type: elb
     regions:
-    - us-east-1
+    - eu-west-1
     metrics:
       - name: BackendConnectionErrors
         statistics:

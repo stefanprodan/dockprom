@@ -1,10 +1,56 @@
 apiVersion: v1alpha1
 discovery:
   exportedTagsOnMetrics:
-    ec2:
-      - Name
+    alb:
+      - LoadBalancer
+    mq:
+      - Broker  
+    apigateway:
+      - ApiName   
+    asg:
+      - AutoScalingGroupName
+    cloudfront:
+      - DistributionId    
     ebs:
       - VolumeId
+    ec:
+      - CacheNodeId
+      - CacheClusterId
+    ec2:
+      - Name
+    ecs-containerinsights:
+      - ClusterName
+    ecs-svc:
+      - ServiceName   
+    efs:
+      - FileSystemId
+    elb:
+      - LoadBalancerName
+    firehose:
+      - DeliveryStreamName   
+    kinesis:
+      - StreamName
+    lambda:
+      - FunctionName
+      - Resource
+    ngw:
+      - NatGatewayId
+    nlb:
+      - AvailabilityZone
+      - LoadBalancer
+      - TargetGroup
+    rds:
+      - DBInstanceIdentifier
+    redshift:
+      - ClusterIdentifier
+    route53:
+      - HealthCheckId         
     s3:
-      - BucketName        
+      - BucketName 
+    sns:
+      - TopicName   
+    sqs:
+      - QueueName
+    vpn:
+      - VpnId
   jobs:  
