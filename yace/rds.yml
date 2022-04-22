@@ -1,6 +1,6 @@
   - type: rds
     regions:
-    - us-east-1
+    - eu-west-1
     enableMetricData: true
     metrics:
       - name: BinLogDiskUsage
