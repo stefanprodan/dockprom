@@ -115,6 +115,22 @@ The Docker Containers Dashboard shows key metrics for monitoring running contain
 
 Note that this dashboard doesn't show the containers that are part of the monitoring stack.
 
+For storage and particularly Storage Load graph, you have to specify the fstype in grafana graph request.
+You can find it in `grafana/provisioning/dashboards/docker_containers.json`, at line 406 :
+
+```yaml
+"expr": "(node_filesystem_size_bytes{fstype=\"btrfs\"} - node_filesystem_free_bytes{fstype=\"btrfs\"}) / node_filesystem_size_bytes{fstype=\"btrfs\"}  * 100"，
+```
+
+I work on BTRFS, so i need to change `aufs` to `btrfs`.
+
+You can find right value for your system in Prometheus `http://<host-ip>:9090` launching this request :
+
+```yaml
+node_filesystem_size_bytes
+node_filesystem_free_bytes
+```
+
 ***Monitor Services Dashboard***
 
 ![Monitor Services](https://raw.githubusercontent.com/stefanprodan/dockprom/master/screens/Grafana_Prometheus.png)
