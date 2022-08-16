@@ -44,7 +44,7 @@ Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***
 
 ```yaml
 grafana:
-  image: grafana/grafana:9.0.6
+  image: grafana/grafana:9.1.0
   env_file:
     - config
 ```
