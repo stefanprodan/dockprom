@@ -1,6 +1,6 @@
 # dockprom
 
-A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor),
+A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), [Grafana Loki](https://grafana.com/oss/loki/)
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
 ***If you're looking for the Docker Swarm version please go to [stefanprodan/swarmprom](https://github.com/stefanprodan/swarmprom)***
@@ -383,3 +383,23 @@ To run the grafana container as `user: 104` change your `docker-compose.yml` lik
     labels:
       org.label-schema.group: "monitoring"
 ```
+
+## Reading logs with Loki
+
+To make Loki work with other containers add `logging` section to each container in your `docker-compose.yml` file:
+
+```yml
+    logging:
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+```
+
+To add Loki in Grafana:
+
+- Add data source in Grafana (Configuration -> Data sources -> Add Data Source):
+  ```
+  Name: Loki
+  URL: http://loki:3100
+  ```
+- Go to `Explore` and choose `Loki` as a Data Source
+- Use this query for gettings logs: `{container_name="your_container"}`

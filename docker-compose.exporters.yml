@@ -1,5 +1,9 @@
 version: '2.1'
 
+x-logging: &default-logging
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+
 services:
 
   nodeexporter:
@@ -35,5 +39,13 @@ services:
     network_mode: host
     labels:
       org.label-schema.group: "monitoring"
-  
+    logging: *default-logging
 
+  promtail:
+    image: grafana/promtail:2.6.0
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/log:/var/log:ro
+      - ./loki:/etc/promtail
+    command: -config.file=/etc/promtail/promtail-config.yml
+    logging: *default-logging
