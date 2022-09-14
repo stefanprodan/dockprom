@@ -94,7 +94,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:9.1.1
+    image: grafana/grafana-oss:9.1.5
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -105,6 +105,10 @@ services:
       - 3000
     networks:
       - monitor-net
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
     labels:
       org.label-schema.group: "monitoring"
       traefik.enable: true
