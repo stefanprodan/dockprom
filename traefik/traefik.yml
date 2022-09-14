@@ -52,5 +52,6 @@ tls:
 
 metrics:
   prometheus:
+    entryPoint: metrics
     addEntryPointsLabels: true
     addRoutersLabels: true

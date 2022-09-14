@@ -35,6 +35,7 @@ scrape_configs:
 
   - job_name: 'traefik'
     honor_labels: true
+    metrics_path: '/metrics'
     static_configs:
       - targets:
         - 'traefik:8082'
