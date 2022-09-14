@@ -1,0 +1,57 @@
+## traefik.yml
+
+serversTransport:
+  insecureSkipVerify: true
+
+entryPoints:
+  metrics:
+    address: ':8082'
+  web:
+    address: ':80'
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ':443'
+    http:
+      tls:
+        certResolver: 'cloudflare'
+        domains:
+          - main: "nuc.alanmatuszczak.me"
+            sans:
+              - "*.nuc.alanmatuszczak.me"
+
+# Docker configuration backend
+providers:
+  docker:
+    exposedByDefault: true
+    endpoint: "unix:///run/podman/podman.sock"
+    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.nuc.alanmatuszczak.me`)"
+# API and dashboard configuration
+api:
+  insecure: true
+  dashboard: true
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: "contact@alanmatuszczak.me"
+      storage: /etc/traefik/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+tls:
+  options:
+    default:
+      minVersion: VersionTLS13
+      preferServerCipherSuites: true
+
+metrics:
+  prometheus:
+    addEntryPointsLabels: true
+    addRoutersLabels: true

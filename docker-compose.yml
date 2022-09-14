@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.8'
 
 networks:
   monitor-net:
@@ -30,6 +30,8 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+      traefik.enable: true
+      traefik.http.services.prometheus.loadbalancer.server.port: 9090
 
   alertmanager:
     image: prom/alertmanager:v0.24.0
@@ -46,6 +48,8 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+      traefik.enable: true
+      traefik.http.services.alertmanager.loadbalancer.server.port: 9093
 
   nodeexporter:
     image: prom/node-exporter:v1.3.1
@@ -78,7 +82,7 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
-      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+      - /cgroup:/cgroup:ro
     restart: unless-stopped
     expose:
       - 8080
@@ -94,10 +98,6 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-    environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
     expose:
       - 3000
@@ -105,6 +105,8 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+      traefik.enable: true
+      traefik.http.services.grafana.loadbalancer.server.port: 3000
 
   pushgateway:
     image: prom/pushgateway:v1.4.3
@@ -116,17 +118,19 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+      traefik.enable: true
+      traefik.http.services.pushgateway.loadbalancer.server.port: 9091
 
-  caddy:
-    image: caddy:2.3.0
-    container_name: caddy
+  traefik:
+    image: traefik:2.8
+    container_name: traefik
     ports:
-      - "3000:3000"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
+      - "80:80"
+      - "443:443"
+      - "8183:8183"
     volumes:
-      - ./caddy:/etc/caddy
+      - ./traefik:/etc/traefik
+    env_file: ./traefik/.env
     environment:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
