@@ -9,7 +9,6 @@ volumes:
     grafana_data: {}
 
 services:
-
   prometheus:
     image: prom/prometheus:v2.38.0
     container_name: prometheus
@@ -28,6 +27,9 @@ services:
       - 9090
     networks:
       - monitor-net
+    dns:
+      - 100.100.100.100 #tailscale
+      - 1.1.1.1
     labels:
       org.label-schema.group: "monitoring"
       traefik.enable: true
