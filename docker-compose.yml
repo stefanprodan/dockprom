@@ -129,12 +129,9 @@ services:
       - "443:443"
       - "8183:8183"
     volumes:
+      - /run/podman/podman.sock:/var/run/docker.sock
       - ./traefik:/etc/traefik
     env_file: ./traefik/.env
-    environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
     restart: unless-stopped
     networks:
       - monitor-net

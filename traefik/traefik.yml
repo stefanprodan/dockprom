@@ -27,7 +27,6 @@ entryPoints:
 providers:
   docker:
     exposedByDefault: true
-    endpoint: "unix:///run/podman/podman.sock"
     defaultRule: "Host(`{{ trimPrefix `/` .Name }}.nuc.alanmatuszczak.me`)"
 # API and dashboard configuration
 api:
