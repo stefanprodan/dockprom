@@ -27,7 +27,7 @@ entryPoints:
 providers:
   docker:
     exposedByDefault: true
-    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.nuc.alanmatuszczak.me`)"
+    defaultRule: "Host(`{{ coalesce (index .Labels \"com.docker.compose.service\") (normalize .Name) }}.nuc.alanmatuszczak.me`)"
 # API and dashboard configuration
 api:
   insecure: true
