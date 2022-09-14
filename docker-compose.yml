@@ -129,7 +129,7 @@ services:
       - "443:443"
       - "8183:8183"
     volumes:
-      - /run/podman/podman.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/etc/traefik
     env_file: ./traefik/.env
     restart: unless-stopped
