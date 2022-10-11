@@ -20,6 +20,14 @@
     reverse_proxy pushgateway:9091
 }
 
+:8080 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    
+    reverse_proxy cadvisor:9091
+}
+
 :3000 {
     reverse_proxy grafana:3000
 }
