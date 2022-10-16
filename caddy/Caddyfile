@@ -25,7 +25,7 @@
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }
     
-    reverse_proxy cadvisor:9091
+    reverse_proxy cadvisor:8080
 }
 
 :3000 {
