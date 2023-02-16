@@ -12,7 +12,6 @@ services:
 
   prometheus:
     image: prom/prometheus:v2.41.0
-    container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
@@ -33,7 +32,6 @@ services:
 
   alertmanager:
     image: prom/alertmanager:v0.25.0
-    container_name: alertmanager
     volumes:
       - ./alertmanager:/etc/alertmanager
     command:
@@ -49,7 +47,6 @@ services:
 
   nodeexporter:
     image: prom/node-exporter:v1.5.0
-    container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -69,7 +66,6 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.46.0
-    container_name: cadvisor
     privileged: true
     devices:
       - /dev/kmsg:/dev/kmsg
@@ -89,7 +85,6 @@ services:
 
   grafana:
     image: grafana/grafana:9.3.2
-    container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
@@ -108,7 +103,6 @@ services:
 
   pushgateway:
     image: prom/pushgateway:v1.5.1
-    container_name: pushgateway
     restart: unless-stopped
     expose:
       - 9091
@@ -119,7 +113,6 @@ services:
 
   caddy:
     image: caddy:2.6.2
-    container_name: caddy
     ports:
       - "3000:3000"
       - "8080:8080"
@@ -133,6 +126,36 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
     restart: unless-stopped
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  ping:
+    tty: true
+    stdin_open: true
+    expose:
+      - 9115
+    ports:
+      - 9115:9115
+    image: prom/blackbox-exporter
+    restart: always
+    volumes:
+      - ./blackbox/config:/config
+    command:
+      - '--config.file=/config/blackbox.yml'
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  speedtest:
+    expose:
+      - 9798
+    ports:
+      - 9798:9798
+    image: miguelndecarvalho/speedtest-exporter
+    restart: always
     networks:
       - monitor-net
     labels:
