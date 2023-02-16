@@ -1,0 +1,11 @@
+---
+- targets:
+    - http://www.google.com/;google.com
+    - https://github.com/;github.com
+    - https://www.youtube.com/;youtube.com
+    - https://telegram.org/;telegram.org
+    - https://kino.pub/;kino.pub
+    - https://revolut.com;revolut.com
+    - https://discord.com;discord.com
+    - https://store.steampowered.com;store.steampowered.com
+    - https://www.berlin.de;berlin.de

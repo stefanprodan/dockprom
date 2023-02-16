@@ -1,0 +1,116 @@
+# Ansible managed
+---
+version: "3.5"
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  front-tier:
+    name: internet-monitoring-front-tier
+  back-tier:
+    name: internet-monitoring-back-tier
+
+services:
+
+  prometheus:
+    image: prom/prometheus:v2.25.2
+    restart: always
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=90d'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    links:
+      - ping:ping
+      - speedtest:speedtest
+    networks:
+      - back-tier
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    depends_on:
+      - prometheus
+    ports:
+      - 3030:3000
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+
+  ping:
+    tty: true
+    stdin_open: true
+    expose:
+      - 9115
+    ports:
+      - 9115:9115
+    image: prom/blackbox-exporter
+    restart: always
+    volumes:
+      - ./blackbox/config:/config
+    command:
+      - '--config.file=/config/blackbox.yml'
+    networks:
+      - back-tier
+
+  speedtest:
+    expose:
+      - 9798
+    ports:
+      - 9798:9798
+    image: miguelndecarvalho/speedtest-exporter
+    restart: always
+    networks:
+      - back-tier
+
+  nodeexp:
+    privileged: true
+    image: prom/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    ports:
+      - 9100:9100
+    restart: always
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    networks:
+      - back-tier
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.46.0
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    restart: always
+    expose:
+      - 7880
+    ports:
+      - 7880:8080
+    networks:
+      - back-tier
+    labels:
+      org.label-schema.group: "monitoring"
