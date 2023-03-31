@@ -11,7 +11,7 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.41.0
+    image: prom/prometheus:v2.42.0
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
@@ -65,7 +65,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.46.0
+    image: gcr.io/cadvisor/cadvisor:v0.47.1
     privileged: true
     devices:
       - /dev/kmsg:/dev/kmsg
@@ -84,7 +84,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:9.3.2
+    image: grafana/grafana:9.4.1
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
@@ -96,7 +96,9 @@ services:
       - GF_INSTALL_PLUGINS=flant-statusmap-panel,ae3e-plotly-panel
     restart: unless-stopped
     expose:
-      - 3000
+      - 3030
+    ports:
+      - 3030:3000
     networks:
       - monitor-net
     labels:
@@ -113,9 +115,8 @@ services:
       org.label-schema.group: "monitoring"
 
   caddy:
-    image: caddy:2.6.2
+    image: caddy:2.6.4
     ports:
-      - "3000:3000"
       - "8080:8080"
       - "9090:9090"
       - "9093:9093"
