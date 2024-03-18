@@ -20,7 +20,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: cadvisor
     privileged: true
     devices:
