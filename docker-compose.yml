@@ -82,7 +82,6 @@ services:
     command:
       - '-housekeeping_interval=10s'
       - '-docker_only=true'
-      - '-store_container_labels=false'
     restart: unless-stopped
     expose:
       - 8080
