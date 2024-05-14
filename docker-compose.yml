@@ -86,7 +86,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:10.4.2
+    image: grafana/grafana:11.0.0
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
