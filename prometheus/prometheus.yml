@@ -34,6 +34,12 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'calculatormvcapp'
+    metrics_path: '/mvcapp/metrics'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['192.168.56.104:9010']
+
 
 alerting:
   alertmanagers:
