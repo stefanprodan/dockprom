@@ -1,5 +1,4 @@
 services:
-
   nodeexporter:
     image: prom/node-exporter:v1.8.2
     container_name: nodeexporter
@@ -15,7 +14,7 @@ services:
     restart: unless-stopped
     network_mode: host
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.51.0
@@ -32,6 +31,19 @@ services:
     restart: unless-stopped
     network_mode: host
     labels:
-      org.label-schema.group: "monitoring"
-  
+      org.label-schema.group: 'monitoring'
 
+  alloy:
+    image: grafana/alloy:v1.7.5
+    container_name: alloy
+    volumes:
+      - './alloy/config.alloy:/etc/alloy/config.alloy'
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: ['run', '--server.http.listen-addr=0.0.0.0:12345', '--stability.level=public-preview', '/etc/alloy/config.alloy']
+    restart: unless-stopped
+    environment:
+      - LOKI_HOST=loki:3100
+    network_mode: host
+    labels:
+      org.label-schema.group: 'monitoring'

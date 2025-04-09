@@ -1,7 +1,6 @@
 # dockprom
 
-A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor),
-[NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
+A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [Loki](https://github.com/grafana/loki), [Tempo](https://github.com/grafana/tempo), [cAdvisor](https://github.com/google/cadvisor), [Alloy](https://github.com/grafana/alloy), [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
 ## Install
 
@@ -304,10 +303,10 @@ Please replace the `user:password` part with your user and password set in the i
 
 [In Grafana versions >= 5.1 the id of the grafana user has been changed](http://docs.grafana.org/installation/docker/#migration-from-a-previous-version-of-the-docker-container-to-5-1-or-later). Unfortunately this means that files created prior to 5.1 won’t have the correct permissions for later versions.
 
-| Version |   User  | User ID |
-|:-------:|:-------:|:-------:|
+| Version |  User   | User ID |
+| :-----: | :-----: | :-----: |
 |  < 5.1  | grafana |   104   |
-|  \>= 5.1 | grafana |   472   |
+| \>= 5.1 | grafana |   472   |
 
 There are two possible solutions to this problem.
 
