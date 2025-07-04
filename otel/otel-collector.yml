@@ -1,0 +1,74 @@
+# OTel Configuration File
+# Reference: https://github.com/grafana/intro-to-mltp/blob/main/otel/otel.yml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+        include_metadata: true
+      http:
+        endpoint: 0.0.0.0:4318
+        include_metadata: true
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 100
+
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 1000
+
+exporters:
+  # Exporter for sending trace data to Tempo.
+  otlp/traces:
+    # Send to the running Tempo service.
+    endpoint: tempo:4317
+    # TLS is not enabled for the instance.
+    tls:
+      insecure: true
+    sending_queue:
+      enabled: true
+      num_consumers: 10
+      queue_size: 5000
+
+  otlphttp:
+    endpoint: http://loki:3100/otlp
+
+service:
+  pipelines:
+    # Define the trace pipeline.
+    traces:
+      # Receive from the `otlp` receiver.
+      receivers: [otlp]
+      # Use the `batch` processor to process received trace spans.
+      processors: [batch, memory_limiter]
+      # Comment out other `processor` definitions and uncomment the line below to use tail sampling.
+      #processors: [tail_sampling, batch]
+      # Comment out other `processor` definitions and uncomment the line below to generate service graph metrics
+      # from within the OpenTelemetry Collector.
+      #processors: [servicegraph, batch]
+      # Export to the `otlp/traces` exporter.
+      exporters: [otlp/traces]
+      # Comment out other `exporters` definitions and uncomment the line below to generate span metrics
+      # from within the OpenTelemetry Collector as well as exporting traces to Tempo.
+      #exporters: [otlp/grafana, spanmetrics]
+    # use the prometheus directory to scrape metrics from prometheus
+    # # # Define the metrics pipeline.
+    # metrics:
+    #   # Receive metrics from the `prometheus` receiver.
+    #   receivers: [otlp, prometheus]
+    #   # Comment out other `receivers` definitions and uncomment the line below to import spanmetrics as well
+    #   # as prometheus metrics.
+    #   #receivers: [otlp, prometheus, spanmetrics]
+    #   # Use the `batch` processor to process received metrics.
+    #   processors: [batch, memory_limiter]
+    #   # Export to the `otlp/metrics` exporter.
+    #   exporters: [otlp/metrics]
+    logs:
+      receivers: [otlp]
+      processors: [batch, memory_limiter]
+      exporters: [otlphttp]
+  telemetry:
+    logs:
+      level: 'info'

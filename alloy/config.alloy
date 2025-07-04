@@ -1,0 +1,48 @@
+///////////////////////////////////////////////////////////////////////////////
+// Configuration file
+// Reference: https://github.com/grafana/loki/blob/main/examples/getting-started/alloy-local-config.yaml
+// Reference: https://github.com/grafana/intro-to-mltp/blob/main/alloy/config.alloy
+
+discovery.docker "flog_scrape" {
+  host = "unix:///var/run/docker.sock"
+  refresh_interval = "5s"
+}
+
+discovery.relabel "flog_scrape" {
+	targets = []
+
+	rule {
+		source_labels = ["__meta_docker_container_name"]
+		regex         = "/(.*)"
+		target_label  = "container"
+	}
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_service"]
+    target_label  = "service"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_state_status"]
+    target_label  = "status"
+  }
+}
+
+loki.source.docker "flog_scrape" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.docker.flog_scrape.targets
+  forward_to = [loki.write.to_loki.receiver]
+  relabel_rules = discovery.relabel.flog_scrape.rules
+  refresh_interval = "5s"
+}
+
+
+loki.write "to_loki" {
+  endpoint {
+		url = string.format(
+			"http://%s/loki/api/v1/push",
+			coalesce(sys.env("LOKI_HOST"), "localhost:3100"),
+		)
+	}
+  external_labels = {}
+}

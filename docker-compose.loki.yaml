@@ -1,0 +1,96 @@
+networks:
+  monitor-net:
+    driver: bridge
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector:0.123.0
+    container_name: otel-collector
+    restart: unless-stopped
+    command: ['--config=/etc/otel-collector.yaml']
+    volumes:
+      - ./otel/otel-collector.yaml:/etc/otel-collector.yaml
+    ports:
+      - '1888:1888' # pprof extension
+      - '8888:8888' # Prometheus metrics exposed by the collector
+      - '8889:8889' # Prometheus exporter metrics
+      - '13133:13133' # health_check extension
+      - '4317:4317' # OTLP gRPC receiver
+      - '4318:4318' # OTLP HTTP receiver
+      - '55679:55679' # zpages extension
+    depends_on:
+      - tempo
+      - loki
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: 'monitoring'
+
+  alloy:
+    image: grafana/alloy:v1.7.5
+    container_name: alloy
+    volumes:
+      - './alloy/config.alloy:/etc/alloy/config.alloy'
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: ['run', '--server.http.listen-addr=0.0.0.0:12345', '--stability.level=public-preview', '/etc/alloy/config.alloy']
+    restart: unless-stopped
+    expose:
+      - 12345
+    environment:
+      - LOKI_HOST=loki:3100
+    depends_on:
+      - otel-collector
+      - loki
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: 'monitoring'
+
+  tempo:
+    image: grafana/tempo:2.7.2
+    container_name: tempo
+    restart: unless-stopped
+    command: ['-config.file=/etc/tempo.yaml']
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+      - ./data/tempo:/var/tempo
+    expose:
+      - 14268
+      - 3200
+      - 4317
+      - 4318
+      - 9411
+    ports:
+      - '14268' # jaeger ingest
+      - '3200' # tempo
+      - '4317' # otlp grpc
+      - '4318' # otlp http
+      - '9411' # zipkin
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: 'monitoring'
+
+  loki:
+    image: grafana/loki:3.4
+    container_name: loki
+    restart: unless-stopped
+    user: root
+    command: -config.file=/etc/loki/loki.yaml -config.expand-env=true
+    expose:
+      - 3100
+    ports:
+      - '3100:3100' # loki needs to be exposed so it receives logs
+    environment:
+      - JAEGER_AGENT_HOST=tempo
+      - JAEGER_ENDPOINT=http://tempo:14268/api/traces # send traces to Tempo
+      - JAEGER_SAMPLER_TYPE=const
+      - JAEGER_SAMPLER_PARAM=1
+    volumes:
+      - ./loki/loki.yaml:/etc/loki/loki.yaml
+      - ./data/loki:/tmp/loki
+    networks:
+      - monitor-net
+    labels:
+      org.label-schema.group: 'monitoring'

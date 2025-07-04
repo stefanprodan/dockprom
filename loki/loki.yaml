@@ -1,0 +1,98 @@
+# Loki Configuration File
+# Reference: https://grafana.com/docs/loki/latest/configure/examples/configuration-examples/
+# Reference: https://github.com/grafana/loki/blob/main/production/docker/config/loki.yaml
+
+# Disable authentication for development/testing purposes
+auth_enabled: false
+
+# Server configuration
+server:
+  # Listen on all network interfaces
+  http_listen_address: 0.0.0.0
+  # Default Loki HTTP port
+  http_listen_port: 3100
+
+# Common configuration shared across components
+common:
+  ring:
+    # Ring configuration for distributed deployments
+    instance_addr: 127.0.0.1
+    kvstore:
+      # Use in-memory storage for development
+      store: inmemory
+  # Number of replicas for data
+  replication_factor: 1
+  # Base directory for Loki data
+  path_prefix: /tmp/loki
+
+# Schema configuration for time-series data
+schema_config:
+  configs:
+    - from: 2020-05-15
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+# Storage configuration
+storage_config:
+  tsdb_shipper:
+    # Directory for active index files
+    active_index_directory: /tmp/loki/index
+    # Directory for index cache
+    cache_location: /tmp/loki/index_cache
+  filesystem:
+    # Directory for chunk storage
+    directory: /tmp/loki/chunks
+
+# Limits configuration for resource management
+limits_config:
+  # Data retention period (30 days)
+  retention_period: 720h
+  # Enable rejection of old samples
+  reject_old_samples: true
+  # Maximum age of samples to accept
+  reject_old_samples_max_age: 720h
+  # Rate limiting configuration
+  # 2MB burst, 1MB/s rate
+  ingestion_rate_mb: 10
+  ingestion_burst_size_mb: 20
+  # Enable structured metadata
+  allow_structured_metadata: true
+  # Split queries by time interval
+  split_queries_by_interval: 15m
+  # Enable volume tracking
+  volume_enabled: true
+  # OTLP configuration for resource attributes
+  otlp_config:
+    resource_attributes:
+      ignore_defaults: true
+      attributes_config:
+        - action: index_label
+          regex: service.group
+
+# Table manager configuration for data retention
+table_manager:
+  # Enable automatic deletion of old data
+  retention_deletes_enabled: true
+  # Retention period for tables (14 days)
+  retention_period: 336h
+
+# Ruler configuration for alerting
+ruler:
+  # Enable ruler API
+  enable_api: true
+  storage:
+    # Use local storage for rules
+    type: local
+    local:
+      # Directory for rule storage
+      directory: /tmp/loki/rules
+  # Path for Prometheus rules
+  rule_path: /loki/prom-rules
+  ring:
+    kvstore:
+      # Use in-memory storage for ring
+      store: inmemory

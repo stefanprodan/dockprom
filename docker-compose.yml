@@ -3,11 +3,10 @@ networks:
     driver: bridge
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
+  prometheus_data: {}
+  grafana_data: {}
 
 services:
-
   prometheus:
     image: prom/prometheus:v3.4.2
     container_name: prometheus
@@ -27,7 +26,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   alertmanager:
     image: prom/alertmanager:v0.28.1
@@ -43,7 +42,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   nodeexporter:
     image: prom/node-exporter:v1.9.1
@@ -63,7 +62,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.52.1
@@ -83,7 +82,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   grafana:
     image: grafana/grafana:12.0.2
@@ -102,7 +101,7 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   pushgateway:
     image: prom/pushgateway:v1.11.0
@@ -113,17 +112,17 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
 
   caddy:
     image: caddy:2.10.0
     container_name: caddy
     ports:
-      - "3000:3000"
-      - "8080:8080"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
+      - '3000:3000'
+      - '8080:8080'
+      - '9090:9090'
+      - '9093:9093'
+      - '9091:9091'
     volumes:
       - ./caddy:/etc/caddy
     environment:
@@ -134,4 +133,4 @@ services:
     networks:
       - monitor-net
     labels:
-      org.label-schema.group: "monitoring"
+      org.label-schema.group: 'monitoring'
