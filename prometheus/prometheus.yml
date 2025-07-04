@@ -19,7 +19,7 @@ scrape_configs:
       - targets: ['nodeexporter:9100']
 
   - job_name: 'cadvisor'
-    scrape_interval: 5s
+    scrape_interval: 15s
     static_configs:
       - targets: ['cadvisor:8080']
 
