@@ -1,9 +1,13 @@
+templates:
+  - 'telegram.tpl'
+
 receivers:
 - name: 'telegram'
   telegram_configs:
-  - chat_id: ${CHATID}
-    bot_token: ${TELEGRAM_TOKEN}
+  - chat_id: ${CHANNEL}
+    bot_token: ${TOKEN}
     send_resolved: true  # Optional: Send notifications when alerts resolve
+    parse_mode: 'Markdown'
     message: '{{ template "telegram.message" . }}'
 
 route:

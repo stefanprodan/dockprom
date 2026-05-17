@@ -266,7 +266,10 @@ A complete list of integrations can be found [here](https://prometheus.io/docs/a
 You can view and silence notifications by accessing `http://<host-ip>:9093`.
 
 The notification receivers can be configured in [alertmanager/config.yml](https://github.com/stefanprodan/dockprom/blob/master/alertmanager/config.yml) file.
-
+Please render config.tpl to config.yml with 
+```
+envsubst config.yml > config.yml
+```
 To receive alerts via Slack you need to make a custom integration by choose ***incoming web hooks*** in your Slack team app page.
 You can find more details on setting up Slack integration [here](http://www.robustperception.io/using-slack-with-the-alertmanager/).
 
