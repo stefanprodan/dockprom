@@ -24,7 +24,7 @@ services:
       - '--retentionPeriod=12'  # 12 meses de retención
 
   prometheus:
-    image: prom/prometheus:v2.55.0
+    image: prom/prometheus:v3.10.0
     container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
@@ -43,7 +43,7 @@ services:
       - 9090:9090
 
   alertmanager:
-    image: prom/alertmanager:v0.28.0
+    image: prom/alertmanager:v0.31.1
     container_name: alertmanager
     volumes:
       - ./alertmanager:/etc/alertmanager
@@ -57,7 +57,7 @@ services:
       - docker_internal
 
   nodeexporter:
-    image: prom/node-exporter:v1.8.2
+    image: prom/node-exporter:v1.10.2
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
@@ -72,7 +72,7 @@ services:
     network_mode: host
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.51.0
+    image: gcr.io/cadvisor/cadvisor:v0.55.1
     container_name: cadvisor
     privileged: true
     devices:
@@ -90,7 +90,7 @@ services:
       - docker_internal
 
   grafana:
-    image: grafana/grafana:11.3.0
+    image: grafana/grafana:12.4.0
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -107,7 +107,7 @@ services:
       - docker_internal
 
   caddy:
-    image: caddy:2.8.4
+    image: caddy:2.11.2
     container_name: caddy
     ports:
       - "80:80"
