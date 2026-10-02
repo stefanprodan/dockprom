@@ -1,4 +1,3 @@
-*DS_Store
-.vs/
-.vscode/
-.idea/
+secrets
+prometheus/prometheus.yml
+alertmanager/config.yml

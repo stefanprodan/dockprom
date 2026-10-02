@@ -1,0 +1,9 @@
+[Unit]
+Description=APC UPS Power Control Daemon for Linux
+
+[Service]
+ExecStartPre=-/bin/rm -f /etc/apcupsd/powerfail
+ExecStart=/sbin/apcupsd -b -f /etc/apcupsd/apcupsd.conf
+
+[Install]
+WantedBy=multi-user.target

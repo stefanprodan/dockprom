@@ -1,0 +1,94 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  # external_labels:
+  #     monitor: 'docker-host-alpha'
+
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - "alert.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape.
+scrape_configs:
+  - job_name: 'leviathan_nodeexporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.69.222:9100']
+    relabel_configs:
+     - source_labels: [__address__]
+       regex: "([^:]+):.*"
+       target_label: computer
+       replacement: "$1"
+
+  - job_name: 'SAI'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.69.222:9162']
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: "([^:]+):.*"
+        target_label: computer
+        replacement: "$1"
+
+  - job_name: 'leviathan_cadvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['cadvisor:8080']
+    relabel_configs:
+     - source_labels: [__address__]
+       regex: "([^:]+):.*"
+       target_label: computer
+       replacement: "$1"
+
+  - job_name: 'valhalla_nodeexporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.69.15:9100']
+    relabel_configs:
+     - source_labels: [__address__]
+       regex: "([^:]+):.*"
+       target_label: computer
+       replacement: "$1"
+
+  - job_name: 'valhalla_cadvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.69.15:8080']
+    relabel_configs:
+     - source_labels: [__address__]
+       regex: "([^:]+):.*"
+       target_label: computer
+       replacement: "$1"
+
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: "homeassistant"
+    scrape_interval: 15s
+    metrics_path: /api/prometheus
+
+    # Long-Lived Access Token
+    bearer_token: ${TOKEN}
+
+    scheme: http
+    static_configs:
+      - targets: ['192.168.69.100:8123']
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - 'alertmanager:9093'
+
+remote_write:
+  - url: "http://victoriametrics:8428/api/v1/write"
+    write_relabel_configs:
+      - source_labels: ['entity']
+        regex: "sensor.shellyem_34945473c9c4_channel_1_power"
+        action: keep

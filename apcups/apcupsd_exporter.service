@@ -1,0 +1,8 @@
+[Unit]
+Description=APC UPS Power Control Monitor for Prometheus
+
+[Service]
+ExecStart=/usr/bin/apcupsd_exporter
+
+[Install]
+WantedBy=multi-user.target

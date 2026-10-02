@@ -1,0 +1,3 @@
+- find storage needed with
+  https://faun.pub/how-to-calculate-the-storage-space-required-for-prometheus-server-24ce4cacc30d
+- do not expose ports, caddy should be able to connect without exposing them

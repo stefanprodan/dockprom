@@ -1,31 +1,46 @@
-:3000 {
-    reverse_proxy grafana:3000  
+http://grafana.home.lan {
+    reverse_proxy http://grafana:3000
 }
 
-:8080 {
-    basicauth /* {
+http://cadvisor.home.lan {
+    basic_auth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }    
-    reverse_proxy cadvisor:8080
+    reverse_proxy http://cadvisor:8080
 }
 
-:9090 {
-    basicauth /* {
+http://prometheus.home.lan {
+    basic_auth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }
-    reverse_proxy prometheus:9090
+    reverse_proxy http://prometheus:9090
 }
 
-:9093 {
-    basicauth /* {
+http://alertmanager.home.lan {
+    basic_auth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
     }
-    reverse_proxy alertmanager:9093
+    reverse_proxy http://alertmanager:9093
 }
 
-:9091 {
-    basicauth /* {
+http://nodeexporter.leviathan.home.lan {
+    basic_auth /* {
         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-    }    
-    reverse_proxy pushgateway:9091
+    }
+    reverse_proxy http://nodeexporter:9100
+}
+
+http://vmetrics.home.lan {
+    basic_auth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy http://victoriametrics:8428
+}
+
+http://transmission.home.lan {
+    reverse_proxy http://transmission:9091
+}
+
+http://adguard.home.lan {
+    reverse_proxy http://nginx:80
 }

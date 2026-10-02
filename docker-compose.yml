@@ -1,12 +1,27 @@
 networks:
-  monitor-net:
+  docker_internal:
     driver: bridge
+    name: docker_internal
 
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    vmdata: {}
 
 services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics
+    ports:
+      - "8428:8428"  # Interfaz web y endpoint de escritura
+    restart: unless-stopped
+    volumes:
+      - vmdata:/storage
+    networks:
+      - docker_internal
+    command:
+      - '--storageDataPath=/storage'
+      - '--retentionPeriod=12'  # 12 meses de retención
 
   prometheus:
     image: prom/prometheus:v3.10.0
@@ -19,15 +34,13 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
+      - '--storage.tsdb.retention.time=15d'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    expose:
-      - 9090
     networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+      - docker_internal
+    ports:
+      - 9090:9090
 
   alertmanager:
     image: prom/alertmanager:v0.31.1
@@ -38,12 +51,10 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-    expose:
-      - 9093
+    ports:
+      - 9093:9093
     networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+      - docker_internal
 
   nodeexporter:
     image: prom/node-exporter:v1.10.2
@@ -58,12 +69,7 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
-    expose:
-      - 9100
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+    network_mode: host
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.55.1
@@ -76,14 +82,12 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
-      #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    ports:
+      - 8080:8080
     restart: unless-stopped
-    expose:
-      - 8080
     networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+      - docker_internal
 
   grafana:
     image: grafana/grafana:12.4.0
@@ -96,34 +100,20 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - "3000:3000"
     restart: unless-stopped
-    expose:
-      - 3000
     networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
-
-  pushgateway:
-    image: prom/pushgateway:v1.11.2
-    container_name: pushgateway
-    restart: unless-stopped
-    expose:
-      - 9091
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
+      - docker_internal
 
   caddy:
     image: caddy:2.11.2
     container_name: caddy
     ports:
-      - "3000:3000"
-      - "8080:8080"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
+      - "80:80"
+      - "443:443"
+    networks:
+      - docker_internal    
     volumes:
       - ./caddy:/etc/caddy
     environment:
@@ -131,7 +121,3 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
     restart: unless-stopped
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
