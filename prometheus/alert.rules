@@ -2,12 +2,12 @@ groups:
 - name: power_alerts
   rules:
   - alert: Power consumption too high
-    expr: homeassistant_sensor_power_w > 3000
+    expr: homeassistant_sensor_power_w > 3500
     for: 5s
     labels:
       severity: critical
     annotations:
-      summary: "Power consumption too high - over 3000W"
+      summary: "Power consumption too high - over 3500"
       description: "There is a high power consumption at home."
   - alert: Power consumption too high with empty house
     expr: (homeassistant_input_boolean_state{friendly_name="atHome"} == 1) and (homeassistant_sensor_power_w > 300)
